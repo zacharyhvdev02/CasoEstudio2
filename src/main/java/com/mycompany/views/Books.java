@@ -5,6 +5,8 @@ import com.mycompany.ilib.Dashboard;
 import com.mycompany.interfaces.DAOBooks;
 import java.awt.Color;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.GroupLayout;
 
 public class Books extends javax.swing.JPanel {
 
@@ -14,13 +16,13 @@ public class Books extends javax.swing.JPanel {
         LoadBooks();
     }
     
-    private void InitStyles() {
+    protected void InitStyles() {
         title.putClientProperty("FlatLaf.styleClass", "h1");
         title.setForeground(Color.black);
         bookSearch.putClientProperty("JTextField.placeholderText", "Ingrese el título del libro a buscar.");
     }
     
-    private void LoadBooks() {
+    protected void LoadBooks() {
         try {
             DAOBooks dao = new DAOBooksImpl();
             DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
@@ -181,15 +183,20 @@ public class Books extends javax.swing.JPanel {
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        	layout.createParallelGroup(Alignment.LEADING)
+        		.addGroup(layout.createSequentialGroup()
+        			.addContainerGap()
+        			.addComponent(bg, GroupLayout.DEFAULT_SIZE, 756, Short.MAX_VALUE)
+        			.addContainerGap())
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        	layout.createParallelGroup(Alignment.LEADING)
+        		.addGroup(Alignment.TRAILING, layout.createSequentialGroup()
+        			.addContainerGap()
+        			.addComponent(bg, GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE))
         );
+        this.setLayout(layout);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTable1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MousePressed
