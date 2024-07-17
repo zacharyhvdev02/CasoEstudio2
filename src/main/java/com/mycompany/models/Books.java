@@ -13,6 +13,7 @@ public class Books {
     private String ejemplares;
     private int stock;
     private int available;
+    private BookState state;
 
     public void setId(int id) {
         this.id = id;
@@ -61,6 +62,15 @@ public class Books {
     public void setAvailable(int available) {
         this.available = available;
     }
+    
+    // for SQL integer conversion.
+    public void setState(int state) {
+    	this.state = BookState.from(state);
+    }
+    
+    public void setState(BookState state) {
+    	this.state = state;
+    }
 
     public int getId() {
         return id;
@@ -108,5 +118,9 @@ public class Books {
 
     public int getAvailable() {
         return available;
+    }
+    
+    public BookState getState() {
+    	return this.state;
     }
 }

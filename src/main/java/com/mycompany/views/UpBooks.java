@@ -2,8 +2,15 @@ package com.mycompany.views;
 
 import com.mycompany.ilib.DAOBooksImpl;
 import com.mycompany.interfaces.DAOBooks;
+import com.mycompany.models.BookState;
 import com.mycompany.utils.Utils;
 import java.awt.Color;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.GroupLayout;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+import java.awt.Dimension;
 
 public class UpBooks extends javax.swing.JPanel {
 
@@ -11,6 +18,7 @@ public class UpBooks extends javax.swing.JPanel {
     com.mycompany.models.Books bookEdition;
 
     public UpBooks() {
+    	setMinimumSize(new Dimension(10, 200));
         initComponents();
         InitStyles();
     }
@@ -67,6 +75,7 @@ public class UpBooks extends javax.swing.JPanel {
     private void initComponents() {
 
         bg = new javax.swing.JPanel();
+        bg.setMinimumSize(new Dimension(10, 200));
         title = new javax.swing.JLabel();
         titleLbl = new javax.swing.JLabel();
         titleTxt = new javax.swing.JTextField();
@@ -111,7 +120,7 @@ public class UpBooks extends javax.swing.JPanel {
 
         jSeparator1.setForeground(new java.awt.Color(204, 204, 204));
         jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
-        jSeparator1.setPreferredSize(new java.awt.Dimension(200, 10));
+        jSeparator1.setPreferredSize(new java.awt.Dimension(200, 200));
 
         langLbl.setText("Idioma");
 
@@ -134,7 +143,7 @@ public class UpBooks extends javax.swing.JPanel {
 
         dispLbl.setText("Disponibles");
 
-        ejemLbl.setText("Ejemplares");
+        ejemLbl.setText("Estado");
 
         ejemTxt.setToolTipText("");
 
@@ -149,141 +158,173 @@ public class UpBooks extends javax.swing.JPanel {
                 buttonActionPerformed(evt);
             }
         });
+        
+        JLabel ejemLbl_1 = new JLabel();
+        ejemLbl_1.setText("Ejemplares");
+        
+        estadoTxt = new JTextField();
+        estadoTxt.setText("Buen estado");
+        estadoTxt.setToolTipText("");
 
         javax.swing.GroupLayout bgLayout = new javax.swing.GroupLayout(bg);
-        bg.setLayout(bgLayout);
         bgLayout.setHorizontalGroup(
-            bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(bgLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(bgLayout.createSequentialGroup()
-                        .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(catTxt)
-                            .addComponent(authorTxt)
-                            .addGroup(bgLayout.createSequentialGroup()
-                                .addComponent(authorLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGap(233, 233, 233))
-                            .addGroup(bgLayout.createSequentialGroup()
-                                .addComponent(catLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGap(213, 213, 213))
-                            .addGroup(bgLayout.createSequentialGroup()
-                                .addComponent(titleLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGap(234, 234, 234))
-                            .addComponent(titleTxt)
-                            .addGroup(bgLayout.createSequentialGroup()
-                                .addComponent(dateLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGap(161, 161, 161))
-                            .addComponent(dateTxt)
-                            .addComponent(edTxt, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(bgLayout.createSequentialGroup()
-                                .addComponent(edLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGap(227, 227, 227)))
-                        .addGap(68, 68, 68)
-                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(70, 70, 70)
-                        .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(langTxt)
-                            .addGroup(bgLayout.createSequentialGroup()
-                                .addComponent(langLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGap(228, 228, 228))
-                            .addComponent(pagsTxt)
-                            .addGroup(bgLayout.createSequentialGroup()
-                                .addComponent(pagsLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGap(223, 223, 223))
-                            .addComponent(button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(bgLayout.createSequentialGroup()
-                                .addComponent(descLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGap(206, 206, 206))
-                            .addComponent(descTxt)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, bgLayout.createSequentialGroup()
-                                .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(stockTxt)
-                                    .addGroup(bgLayout.createSequentialGroup()
-                                        .addComponent(stockLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addGap(94, 94, 94)))
-                                .addGap(20, 20, 20)
-                                .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(bgLayout.createSequentialGroup()
-                                        .addComponent(dispLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addGap(67, 67, 67))
-                                    .addComponent(dispTxt)))
-                            .addGroup(bgLayout.createSequentialGroup()
-                                .addComponent(ejemLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGap(208, 208, 208))
-                            .addComponent(ejemTxt))
-                        .addGap(72, 72, 72))
-                    .addGroup(bgLayout.createSequentialGroup()
-                        .addComponent(title, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(553, 553, 553))))
+        	bgLayout.createParallelGroup(Alignment.LEADING)
+        		.addGroup(bgLayout.createSequentialGroup()
+        			.addContainerGap()
+        			.addGroup(bgLayout.createParallelGroup(Alignment.LEADING)
+        				.addGroup(bgLayout.createSequentialGroup()
+        					.addComponent(title, GroupLayout.DEFAULT_SIZE, 186, Short.MAX_VALUE)
+        					.addContainerGap())
+        				.addGroup(bgLayout.createSequentialGroup()
+        					.addGroup(bgLayout.createParallelGroup(Alignment.LEADING)
+        						.addComponent(catTxt, 260, 260, 260)
+        						.addComponent(authorTxt, 260, 260, 260)
+        						.addGroup(bgLayout.createSequentialGroup()
+        							.addComponent(authorLbl, GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
+        							.addGap(233))
+        						.addGroup(bgLayout.createSequentialGroup()
+        							.addComponent(catLbl, GroupLayout.DEFAULT_SIZE, 47, Short.MAX_VALUE)
+        							.addGap(213))
+        						.addGroup(bgLayout.createSequentialGroup()
+        							.addComponent(titleLbl, GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE)
+        							.addGap(234))
+        						.addComponent(titleTxt, 260, 260, 260)
+        						.addGroup(bgLayout.createSequentialGroup()
+        							.addComponent(dateLbl, GroupLayout.DEFAULT_SIZE, 99, Short.MAX_VALUE)
+        							.addGap(161))
+        						.addComponent(dateTxt, 260, 260, 260)
+        						.addComponent(edTxt, Alignment.TRAILING, 260, 260, 260)
+        						.addGroup(bgLayout.createSequentialGroup()
+        							.addComponent(edLbl, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        							.addGap(227)))
+        					.addGap(68)
+        					.addComponent(jSeparator1, GroupLayout.PREFERRED_SIZE, 10, GroupLayout.PREFERRED_SIZE)
+        					.addGap(70)
+        					.addGroup(bgLayout.createParallelGroup(Alignment.LEADING)
+        						.addGroup(bgLayout.createSequentialGroup()
+        							.addComponent(ejemLbl_1, GroupLayout.PREFERRED_SIZE, 51, GroupLayout.PREFERRED_SIZE)
+        							.addContainerGap())
+        						.addGroup(bgLayout.createParallelGroup(Alignment.LEADING)
+        							.addGroup(bgLayout.createSequentialGroup()
+        								.addComponent(ejemTxt, 259, 259, 259)
+        								.addContainerGap())
+        							.addGroup(bgLayout.createParallelGroup(Alignment.LEADING)
+        								.addGroup(bgLayout.createSequentialGroup()
+        									.addComponent(ejemLbl, GroupLayout.DEFAULT_SIZE, 321, Short.MAX_VALUE)
+        									.addContainerGap())
+        								.addGroup(bgLayout.createSequentialGroup()
+        									.addComponent(stockLbl, GroupLayout.DEFAULT_SIZE, 321, Short.MAX_VALUE)
+        									.addContainerGap())
+        								.addGroup(bgLayout.createSequentialGroup()
+        									.addComponent(descTxt, 259, 259, 259)
+        									.addContainerGap())
+        								.addGroup(bgLayout.createSequentialGroup()
+        									.addComponent(descLbl, GroupLayout.DEFAULT_SIZE, 321, Short.MAX_VALUE)
+        									.addContainerGap())
+        								.addGroup(bgLayout.createSequentialGroup()
+        									.addComponent(pagsTxt, 259, 259, 259)
+        									.addContainerGap())
+        								.addGroup(bgLayout.createSequentialGroup()
+        									.addComponent(pagsLbl, GroupLayout.DEFAULT_SIZE, 321, Short.MAX_VALUE)
+        									.addContainerGap())
+        								.addGroup(bgLayout.createSequentialGroup()
+        									.addGroup(bgLayout.createParallelGroup(Alignment.LEADING)
+        										.addGroup(bgLayout.createSequentialGroup()
+        											.addComponent(langLbl, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        											.addGap(228))
+        										.addGroup(bgLayout.createSequentialGroup()
+        											.addComponent(stockTxt, 120, 120, 120)
+        											.addGroup(bgLayout.createParallelGroup(Alignment.LEADING)
+        												.addGroup(bgLayout.createSequentialGroup()
+        													.addGap(20)
+        													.addComponent(dispLbl, GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE))
+        												.addGroup(bgLayout.createSequentialGroup()
+        													.addGap(18)
+        													.addComponent(dispTxt, 119, 119, 119))))
+        										.addGroup(bgLayout.createSequentialGroup()
+        											.addPreferredGap(ComponentPlacement.RELATED)
+        											.addGroup(bgLayout.createParallelGroup(Alignment.LEADING)
+        												.addComponent(button, GroupLayout.DEFAULT_SIZE, 259, Short.MAX_VALUE)
+        												.addComponent(estadoTxt, GroupLayout.PREFERRED_SIZE, 259, GroupLayout.PREFERRED_SIZE))))
+        									.addGap(72))
+        								.addGroup(bgLayout.createSequentialGroup()
+        									.addComponent(langTxt, 259, 259, 259)
+        									.addContainerGap())))))))
         );
         bgLayout.setVerticalGroup(
-            bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(bgLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(title, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(bgLayout.createSequentialGroup()
-                        .addComponent(langLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(langTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(pagsLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(pagsTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(descLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(descTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(stockLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(dispLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(stockTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(dispTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(9, 9, 9)
-                        .addComponent(ejemLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(ejemTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(button, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jSeparator1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(bgLayout.createSequentialGroup()
-                        .addComponent(titleLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(titleTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(dateLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(dateTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(authorLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(authorTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(11, 11, 11)
-                        .addComponent(catLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(catTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(edLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(edTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(22, 22, 22))
+        	bgLayout.createParallelGroup(Alignment.LEADING)
+        		.addGroup(bgLayout.createSequentialGroup()
+        			.addContainerGap()
+        			.addComponent(title, GroupLayout.PREFERRED_SIZE, 52, GroupLayout.PREFERRED_SIZE)
+        			.addGap(32)
+        			.addGroup(bgLayout.createParallelGroup(Alignment.LEADING)
+        				.addGroup(bgLayout.createSequentialGroup()
+        					.addComponent(langLbl, GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
+        					.addGap(2)
+        					.addComponent(langTxt, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+        					.addGap(2)
+        					.addComponent(pagsLbl, GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+        					.addGap(2)
+        					.addComponent(pagsTxt, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+        					.addPreferredGap(ComponentPlacement.RELATED)
+        					.addComponent(descLbl, GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE)
+        					.addPreferredGap(ComponentPlacement.RELATED)
+        					.addComponent(descTxt, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+        					.addPreferredGap(ComponentPlacement.UNRELATED)
+        					.addGroup(bgLayout.createParallelGroup(Alignment.BASELINE)
+        						.addComponent(stockLbl, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        						.addComponent(dispLbl, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        					.addPreferredGap(ComponentPlacement.RELATED)
+        					.addGroup(bgLayout.createParallelGroup(Alignment.BASELINE)
+        						.addComponent(stockTxt, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+        						.addComponent(dispTxt, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE))
+        					.addGap(2)
+        					.addComponent(ejemLbl_1, GroupLayout.PREFERRED_SIZE, 35, GroupLayout.PREFERRED_SIZE)
+        					.addPreferredGap(ComponentPlacement.UNRELATED)
+        					.addComponent(ejemTxt, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+        					.addPreferredGap(ComponentPlacement.RELATED)
+        					.addComponent(ejemLbl, GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+        					.addPreferredGap(ComponentPlacement.RELATED)
+        					.addComponent(estadoTxt, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+        					.addPreferredGap(ComponentPlacement.RELATED)
+        					.addComponent(button, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE))
+        				.addComponent(jSeparator1, GroupLayout.PREFERRED_SIZE, 463, Short.MAX_VALUE)
+        				.addGroup(bgLayout.createSequentialGroup()
+        					.addComponent(titleLbl, GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
+        					.addPreferredGap(ComponentPlacement.RELATED)
+        					.addComponent(titleTxt, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+        					.addPreferredGap(ComponentPlacement.RELATED)
+        					.addComponent(dateLbl, GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
+        					.addPreferredGap(ComponentPlacement.RELATED)
+        					.addComponent(dateTxt, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+        					.addPreferredGap(ComponentPlacement.RELATED)
+        					.addComponent(authorLbl, GroupLayout.DEFAULT_SIZE, 53, Short.MAX_VALUE)
+        					.addPreferredGap(ComponentPlacement.RELATED)
+        					.addComponent(authorTxt, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+        					.addGap(11)
+        					.addComponent(catLbl, GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
+        					.addPreferredGap(ComponentPlacement.RELATED)
+        					.addComponent(catTxt, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+        					.addPreferredGap(ComponentPlacement.RELATED)
+        					.addComponent(edLbl, GroupLayout.DEFAULT_SIZE, 51, Short.MAX_VALUE)
+        					.addPreferredGap(ComponentPlacement.RELATED)
+        					.addComponent(edTxt, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)))
+        			.addContainerGap())
         );
+        bg.setLayout(bgLayout);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        	layout.createParallelGroup(Alignment.LEADING)
+        		.addGroup(layout.createSequentialGroup()
+        			.addComponent(bg, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        			.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        	layout.createParallelGroup(Alignment.LEADING)
+        		.addComponent(bg, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 603, Short.MAX_VALUE)
         );
+        this.setLayout(layout);
     }// </editor-fold>//GEN-END:initComponents
 
     private void buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonActionPerformed
@@ -298,10 +339,10 @@ public class UpBooks extends javax.swing.JPanel {
         String stock = stockTxt.getText();
         String disp = dispTxt.getText();
         String ejem = ejemTxt.getText();
-
+        String estado = estadoTxt.getText();
         // Validaciones para los campos
         if (mtitle.isEmpty() || date.isEmpty() || author.isEmpty() || cat.isEmpty() || ed.isEmpty()
-                || lang.isEmpty() || pags.isEmpty() || desc.isEmpty() || stock.isEmpty() || disp.isEmpty() || ejem.isEmpty()) {
+                || lang.isEmpty() || pags.isEmpty() || desc.isEmpty() || stock.isEmpty() || disp.isEmpty() || ejem.isEmpty() || estado.isEmpty()) {
             javax.swing.JOptionPane.showMessageDialog(this, "Debe llenar todos los campos. \n", "AVISO", javax.swing.JOptionPane.ERROR_MESSAGE);
             titleTxt.requestFocus();
             return;
@@ -323,6 +364,7 @@ public class UpBooks extends javax.swing.JPanel {
         book.setEjemplares(ejem);
         book.setStock(Integer.parseInt(stock));
         book.setAvailable(Integer.parseInt(disp));
+        book.setState(BookState.from(estado));
 
         try {
             DAOBooks dao = new DAOBooksImpl();
@@ -384,5 +426,5 @@ public class UpBooks extends javax.swing.JPanel {
     private javax.swing.JLabel title;
     private javax.swing.JLabel titleLbl;
     private javax.swing.JTextField titleTxt;
-    // End of variables declaration//GEN-END:variables
+    private JTextField estadoTxt;
 }

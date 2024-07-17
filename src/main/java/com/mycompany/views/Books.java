@@ -26,7 +26,7 @@ public class Books extends javax.swing.JPanel {
         try {
             DAOBooks dao = new DAOBooksImpl();
             DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-            dao.listar("").forEach((u) -> model.addRow(new Object[]{u.getId(), u.getTitle(), u.getDate(), u.getAuthor(), u.getCategory(), u.getEdit(), u.getLang(), u.getPages(), u.getDescription(), u.getEjemplares(), u.getStock(), u.getAvailable()}));
+            dao.listar("").forEach((u) -> model.addRow(new Object[]{u.getId(), u.getTitle(), u.getDate(), u.getAuthor(), u.getCategory(), u.getEdit(), u.getLang(), u.getPages(), u.getDescription(), u.getEjemplares(), u.getStock(), u.getAvailable(), u.getState().toString()}));
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -106,29 +106,13 @@ public class Books extends javax.swing.JPanel {
         });
 
         jTable1.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "ID", "Título", "Fecha de Pub.", "Autor", "Categoría", "Edición", "Idioma", "Páginas", "Descripción", "Ejemplaresl", "Stock", "Disponibles"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, true, true, true, true, true, true, true, true, true, true, true
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
+        jTable1.setModel(new DefaultTableModel(
+        	new Object[][] {
+        	},
+        	new String[] {
+        		"ID", "T\u00EDtulo", "Fecha de Pub.", "Autor", "Categor\u00EDa", "Edici\u00F3n", "Idioma", "P\u00E1ginas", "Descripci\u00F3n", "Ejemplares", "Stock", "Disponibles", "Estado"
+        	}
+        ));
         jTable1.getTableHeader().setReorderingAllowed(false);
         jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {

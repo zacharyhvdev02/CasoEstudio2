@@ -14,7 +14,7 @@ public class DAOBooksImpl extends Database implements DAOBooks {
     public void registrar(Books book) throws Exception {
         try {
             this.Conectar();
-            PreparedStatement st = this.conexion.prepareStatement("INSERT INTO books(title, date, author, category, edit, lang, pages, description, ejemplares, stock, available) VALUES(?,?,?,?,?,?,?,?,?,?,?);");
+            PreparedStatement st = this.conexion.prepareStatement("INSERT INTO books(title, date, author, category, edit, lang, pages, description, ejemplares, stock, available, state) VALUES(?,?,?,?,?,?,?,?,?,?,?,?);");
             st.setString(1, book.getTitle());
             st.setString(2, book.getDate());
             st.setString(3, book.getAuthor());
@@ -26,6 +26,7 @@ public class DAOBooksImpl extends Database implements DAOBooks {
             st.setString(9, book.getEjemplares());
             st.setInt(10, book.getStock());
             st.setInt(11, book.getAvailable());
+            st.setInt(12, book.getState().getValue());
             st.executeUpdate();
             st.close();
         } catch(Exception e) {
@@ -39,7 +40,7 @@ public class DAOBooksImpl extends Database implements DAOBooks {
     public void modificar(Books book) throws Exception {
         try {
             this.Conectar();
-            PreparedStatement st = this.conexion.prepareStatement("UPDATE books SET title = ?, date = ?, author = ?, category = ?, edit = ?, lang = ?, pages = ?, description = ?, ejemplares = ?, stock = ?, available = ? WHERE id = ?");
+            PreparedStatement st = this.conexion.prepareStatement("UPDATE books SET title = ?, date = ?, author = ?, category = ?, edit = ?, lang = ?, pages = ?, description = ?, ejemplares = ?, stock = ?, available = ?, state = ? WHERE id = ?");
             st.setString(1, book.getTitle());
             st.setString(2, book.getDate());
             st.setString(3, book.getAuthor());
@@ -51,7 +52,8 @@ public class DAOBooksImpl extends Database implements DAOBooks {
             st.setString(9, book.getEjemplares());
             st.setInt(10, book.getStock());
             st.setInt(11, book.getAvailable());
-            st.setInt(12, book.getId());
+            st.setInt(12, book.getState().getValue());
+            st.setInt(13, book.getId());
             st.executeUpdate();
             st.close();
         } catch(Exception e) {
@@ -100,6 +102,7 @@ public class DAOBooksImpl extends Database implements DAOBooks {
                 book.setEjemplares(rs.getString("ejemplares"));
                 book.setStock(rs.getInt("stock"));
                 book.setAvailable(rs.getInt("available"));
+                book.setState(rs.getInt("state"));
                 lista.add(book);
             }
             rs.close();
@@ -136,6 +139,7 @@ public class DAOBooksImpl extends Database implements DAOBooks {
                 book.setEjemplares(rs.getString("ejemplares"));
                 book.setStock(rs.getInt("stock"));
                 book.setAvailable(rs.getInt("available"));
+                book.setState(rs.getInt("state"));
             }
             rs.close();
             st.close();
