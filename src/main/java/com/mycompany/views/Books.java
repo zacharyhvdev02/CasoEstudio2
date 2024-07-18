@@ -5,16 +5,31 @@ import com.mycompany.ilib.Dashboard;
 import com.mycompany.interfaces.DAOBooks;
 import java.awt.Color;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.GroupLayout.Alignment;
-import javax.swing.GroupLayout;
 
 public class Books extends javax.swing.JPanel {
 
     public Books() {
-        initComponents();
+    	initComponents();
+    }
+    
+    public void Init() {
         InitStyles();
         LoadBooks();
     }
+    
+    protected javax.swing.JTable getTable() {
+    	return this.jTable1;
+    }
+    
+    protected javax.swing.JButton getAddButton() {
+    	return this.addButton;
+    }
+    
+    protected javax.swing.JButton getEditButton() {
+    	return this.editButton;
+    }
+    
+    
     
     protected void InitStyles() {
         title.putClientProperty("FlatLaf.styleClass", "h1");
@@ -22,11 +37,15 @@ public class Books extends javax.swing.JPanel {
         bookSearch.putClientProperty("JTextField.placeholderText", "Ingrese el título del libro a buscar.");
     }
     
+    public javax.swing.JPanel getPanel() {
+    	return this;
+    }
+    
     protected void LoadBooks() {
         try {
             DAOBooks dao = new DAOBooksImpl();
             DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-            dao.listar("").forEach((u) -> model.addRow(new Object[]{u.getId(), u.getTitle(), u.getDate(), u.getAuthor(), u.getCategory(), u.getEdit(), u.getLang(), u.getPages(), u.getDescription(), u.getEjemplares(), u.getStock(), u.getAvailable(), u.getState().toString()}));
+            dao.listar("").forEach((u) -> model.addRow(new Object[]{u.getId(), u.getTitle(), u.getDate(), u.getAuthor(), u.getCategory(), u.getEdit(), u.getLang(), u.getPages(), u.getDescription(), u.getEjemplares(), u.getStock(), u.getAvailable()}));
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -41,146 +60,157 @@ public class Books extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        bg = new javax.swing.JPanel();
-        title = new javax.swing.JLabel();
-        bookSearch = new javax.swing.JTextField();
-        searchButton = new javax.swing.JButton();
-        deleteButton = new javax.swing.JButton();
-        editButton = new javax.swing.JButton();
-        addButton = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+    	 bg = new javax.swing.JPanel();
+         title = new javax.swing.JLabel();
+         bookSearch = new javax.swing.JTextField();
+         searchButton = new javax.swing.JButton();
+         deleteButton = new javax.swing.JButton();
+         editButton = new javax.swing.JButton();
+         addButton = new javax.swing.JButton();
+         jScrollPane1 = new javax.swing.JScrollPane();
+         jTable1 = new javax.swing.JTable();
 
-        setBackground(new java.awt.Color(255, 255, 255));
+         setBackground(new java.awt.Color(255, 255, 255));
 
-        bg.setBackground(new java.awt.Color(255, 255, 255));
+         bg.setBackground(new java.awt.Color(255, 255, 255));
 
-        title.setText("Libros");
+         title.setText("Libros");
 
-        searchButton.setBackground(new java.awt.Color(18, 90, 173));
-        searchButton.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        searchButton.setForeground(new java.awt.Color(255, 255, 255));
-        searchButton.setText("Buscar");
-        searchButton.setBorderPainted(false);
-        searchButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        searchButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                searchButtonActionPerformed(evt);
-            }
-        });
+         searchButton.setBackground(new java.awt.Color(18, 90, 173));
+         searchButton.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+         searchButton.setForeground(new java.awt.Color(255, 255, 255));
+         searchButton.setText("Buscar");
+         searchButton.setBorderPainted(false);
+         searchButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+         searchButton.addActionListener(new java.awt.event.ActionListener() {
+             public void actionPerformed(java.awt.event.ActionEvent evt) {
+                 searchButtonActionPerformed(evt);
+             }
+         });
 
-        deleteButton.setBackground(new java.awt.Color(18, 90, 173));
-        deleteButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        deleteButton.setForeground(new java.awt.Color(255, 255, 255));
-        deleteButton.setText("Borrar");
-        deleteButton.setBorderPainted(false);
-        deleteButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        deleteButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                deleteButtonActionPerformed(evt);
-            }
-        });
+         deleteButton.setBackground(new java.awt.Color(18, 90, 173));
+         deleteButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+         deleteButton.setForeground(new java.awt.Color(255, 255, 255));
+         deleteButton.setText("Borrar");
+         deleteButton.setBorderPainted(false);
+         deleteButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+         deleteButton.addActionListener(new java.awt.event.ActionListener() {
+             public void actionPerformed(java.awt.event.ActionEvent evt) {
+                 deleteButtonActionPerformed(evt);
+             }
+         });
 
-        editButton.setBackground(new java.awt.Color(18, 90, 173));
-        editButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        editButton.setForeground(new java.awt.Color(255, 255, 255));
-        editButton.setText("Editar");
-        editButton.setBorderPainted(false);
-        editButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        editButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                editButtonActionPerformed(evt);
-            }
-        });
+         editButton.setBackground(new java.awt.Color(18, 90, 173));
+         editButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+         editButton.setForeground(new java.awt.Color(255, 255, 255));
+         editButton.setText("Editar");
+         editButton.setBorderPainted(false);
+         editButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+         editButton.addActionListener(new java.awt.event.ActionListener() {
+             public void actionPerformed(java.awt.event.ActionEvent evt) {
+                 editButtonActionPerformed(evt);
+             }
+         });
 
-        addButton.setBackground(new java.awt.Color(18, 90, 173));
-        addButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        addButton.setForeground(new java.awt.Color(255, 255, 255));
-        addButton.setText("Nuevo");
-        addButton.setBorderPainted(false);
-        addButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        addButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addButtonActionPerformed(evt);
-            }
-        });
+         addButton.setBackground(new java.awt.Color(18, 90, 173));
+         addButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+         addButton.setForeground(new java.awt.Color(255, 255, 255));
+         addButton.setText("Nuevo");
+         addButton.setBorderPainted(false);
+         addButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+         addButton.addActionListener(new java.awt.event.ActionListener() {
+             public void actionPerformed(java.awt.event.ActionEvent evt) {
+                 addButtonActionPerformed(evt);
+             }
+         });
 
-        jTable1.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
-        jTable1.setModel(new DefaultTableModel(
-        	new Object[][] {
-        	},
-        	new String[] {
-        		"ID", "T\u00EDtulo", "Fecha de Pub.", "Autor", "Categor\u00EDa", "Edici\u00F3n", "Idioma", "P\u00E1ginas", "Descripci\u00F3n", "Ejemplares", "Stock", "Disponibles", "Estado"
-        	}
-        ));
-        jTable1.getTableHeader().setReorderingAllowed(false);
-        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jTable1MousePressed(evt);
-            }
-        });
-        jScrollPane1.setViewportView(jTable1);
+         jTable1.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
+         jTable1.setModel(new javax.swing.table.DefaultTableModel(
+             new Object [][] {
 
-        javax.swing.GroupLayout bgLayout = new javax.swing.GroupLayout(bg);
-        bg.setLayout(bgLayout);
-        bgLayout.setHorizontalGroup(
-            bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(bgLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(bgLayout.createSequentialGroup()
-                        .addComponent(title, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(699, 699, 699))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, bgLayout.createSequentialGroup()
-                        .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(bgLayout.createSequentialGroup()
-                                .addGap(427, 427, 427)
-                                .addComponent(addButton, javax.swing.GroupLayout.DEFAULT_SIZE, 84, Short.MAX_VALUE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(editButton, javax.swing.GroupLayout.DEFAULT_SIZE, 79, Short.MAX_VALUE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(deleteButton, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE))
-                            .addGroup(bgLayout.createSequentialGroup()
-                                .addComponent(bookSearch)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(searchButton)))
-                        .addGap(50, 50, 50))))
-        );
-        bgLayout.setVerticalGroup(
-            bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(bgLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(title, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(bookSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(searchButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 278, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(deleteButton)
-                    .addComponent(editButton)
-                    .addComponent(addButton))
-                .addGap(25, 25, 25))
-        );
+             },
+             new String [] {
+                 "ID", "Título", "Fecha de Pub.", "Autor", "Categoría", "Edición", "Idioma", "Páginas", "Descripción", "Ejemplaresl", "Stock", "Disponibles"
+             }
+         ) {
+             Class[] types = new Class [] {
+                 java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
+             };
+             boolean[] canEdit = new boolean [] {
+                 false, true, true, true, true, true, true, true, true, true, true, true
+             };
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        layout.setHorizontalGroup(
-        	layout.createParallelGroup(Alignment.LEADING)
-        		.addGroup(layout.createSequentialGroup()
-        			.addContainerGap()
-        			.addComponent(bg, GroupLayout.DEFAULT_SIZE, 756, Short.MAX_VALUE)
-        			.addContainerGap())
-        );
-        layout.setVerticalGroup(
-        	layout.createParallelGroup(Alignment.LEADING)
-        		.addGroup(Alignment.TRAILING, layout.createSequentialGroup()
-        			.addContainerGap()
-        			.addComponent(bg, GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE))
-        );
-        this.setLayout(layout);
+             public Class getColumnClass(int columnIndex) {
+                 return types [columnIndex];
+             }
+
+             public boolean isCellEditable(int rowIndex, int columnIndex) {
+                 return canEdit [columnIndex];
+             }
+         });
+         jTable1.getTableHeader().setReorderingAllowed(false);
+         jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+             public void mousePressed(java.awt.event.MouseEvent evt) {
+                 jTable1MousePressed(evt);
+             }
+         });
+         jScrollPane1.setViewportView(jTable1);
+
+         javax.swing.GroupLayout bgLayout = new javax.swing.GroupLayout(bg);
+         bg.setLayout(bgLayout);
+         bgLayout.setHorizontalGroup(
+             bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+             .addGroup(bgLayout.createSequentialGroup()
+                 .addContainerGap()
+                 .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                     .addGroup(bgLayout.createSequentialGroup()
+                         .addComponent(title, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                         .addGap(699, 699, 699))
+                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, bgLayout.createSequentialGroup()
+                         .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                             .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
+                             .addGroup(bgLayout.createSequentialGroup()
+                                 .addGap(427, 427, 427)
+                                 .addComponent(addButton, javax.swing.GroupLayout.DEFAULT_SIZE, 84, Short.MAX_VALUE)
+                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                 .addComponent(editButton, javax.swing.GroupLayout.DEFAULT_SIZE, 79, Short.MAX_VALUE)
+                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                 .addComponent(deleteButton, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE))
+                             .addGroup(bgLayout.createSequentialGroup()
+                                 .addComponent(bookSearch)
+                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                 .addComponent(searchButton)))
+                         .addGap(50, 50, 50))))
+         );
+         bgLayout.setVerticalGroup(
+             bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+             .addGroup(bgLayout.createSequentialGroup()
+                 .addContainerGap()
+                 .addComponent(title, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                 .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                     .addComponent(bookSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                     .addComponent(searchButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 278, Short.MAX_VALUE)
+                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                 .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                     .addComponent(deleteButton)
+                     .addComponent(editButton)
+                     .addComponent(addButton))
+                 .addGap(25, 25, 25))
+         );
+
+         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+         this.setLayout(layout);
+         layout.setHorizontalGroup(
+             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+             .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+         );
+         layout.setVerticalGroup(
+             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+             .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTable1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MousePressed

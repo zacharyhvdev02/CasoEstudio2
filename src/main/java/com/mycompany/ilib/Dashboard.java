@@ -341,7 +341,10 @@ public class Dashboard extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_usersActionPerformed
 
     private void btn_booksActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_booksActionPerformed
-        ShowJPanel(new Books());
+    	BookPlusDecorator books = new BookPlusDecorator(new Books());
+    	//Books books = new Books();
+    	books.Init();
+        ShowJPanel(books.getPanel());
     }//GEN-LAST:event_btn_booksActionPerformed
 
     private void btn_reportsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_reportsActionPerformed

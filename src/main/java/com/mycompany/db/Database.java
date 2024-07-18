@@ -11,10 +11,10 @@ public class Database {
     
     protected Connection conexion;
     private final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
-    private final String DB_URL = "jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12720239";
+    private final String DB_URL = "jdbc:mysql://localhost:3306/proyecto?characterEncoding=latin1";
     
-    private final String USER = "sql12720239";
-    private final String PASS = "4pgWkhPsZm";
+    private final String USER = "root";
+    private final String PASS = "1234";
     
     public void Conectar() throws ClassNotFoundException {
         try {
