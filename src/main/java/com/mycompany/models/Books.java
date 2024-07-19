@@ -1,5 +1,7 @@
 package com.mycompany.models;
 
+import java.util.Date;
+
 public class Books {
     private int id;
     private String title;
@@ -14,6 +16,7 @@ public class Books {
     private int stock;
     private int available;
     private BookState state;
+    private Date createdDate;
 
     public void setId(int id) {
         this.id = id;
@@ -123,4 +126,12 @@ public class Books {
     public BookState getState() {
     	return this.state;
     }
+
+	public Date getCreatedDate() {
+		return createdDate;
+	}
+
+	public void setCreatedDate(Date createdDate) {
+		this.createdDate = createdDate;
+	}
 }

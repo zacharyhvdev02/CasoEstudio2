@@ -5,6 +5,13 @@ import com.mycompany.ilib.Dashboard;
 import com.mycompany.interfaces.DAOBooks;
 import java.awt.Color;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.JLabel;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.GroupLayout;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.JTextPane;
+import javax.swing.JPanel;
+import java.awt.BorderLayout;
 
 public class Books extends javax.swing.JPanel {
 
@@ -29,6 +36,9 @@ public class Books extends javax.swing.JPanel {
     	return this.editButton;
     }
     
+    protected javax.swing.JPanel getBGPanel() {
+    	return this.bg;
+    }
     
     
     protected void InitStyles() {
@@ -155,51 +165,58 @@ public class Books extends javax.swing.JPanel {
              }
          });
          jScrollPane1.setViewportView(jTable1);
+         
+         extraPanel = new JPanel();
+         extraPanel.setBackground(new Color(255, 255, 255));
 
          javax.swing.GroupLayout bgLayout = new javax.swing.GroupLayout(bg);
-         bg.setLayout(bgLayout);
          bgLayout.setHorizontalGroup(
-             bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-             .addGroup(bgLayout.createSequentialGroup()
-                 .addContainerGap()
-                 .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                     .addGroup(bgLayout.createSequentialGroup()
-                         .addComponent(title, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                         .addGap(699, 699, 699))
-                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, bgLayout.createSequentialGroup()
-                         .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                             .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
-                             .addGroup(bgLayout.createSequentialGroup()
-                                 .addGap(427, 427, 427)
-                                 .addComponent(addButton, javax.swing.GroupLayout.DEFAULT_SIZE, 84, Short.MAX_VALUE)
-                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                 .addComponent(editButton, javax.swing.GroupLayout.DEFAULT_SIZE, 79, Short.MAX_VALUE)
-                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                 .addComponent(deleteButton, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE))
-                             .addGroup(bgLayout.createSequentialGroup()
-                                 .addComponent(bookSearch)
-                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                 .addComponent(searchButton)))
-                         .addGap(50, 50, 50))))
+         	bgLayout.createParallelGroup(Alignment.LEADING)
+         		.addGroup(bgLayout.createSequentialGroup()
+         			.addContainerGap()
+         			.addGroup(bgLayout.createParallelGroup(Alignment.TRAILING)
+         				.addGroup(bgLayout.createSequentialGroup()
+         					.addComponent(title, GroupLayout.DEFAULT_SIZE, 47, Short.MAX_VALUE)
+         					.addGap(699))
+         				.addGroup(bgLayout.createSequentialGroup()
+         					.addGroup(bgLayout.createParallelGroup(Alignment.TRAILING)
+         						.addGroup(bgLayout.createSequentialGroup()
+         							.addComponent(extraPanel, GroupLayout.PREFERRED_SIZE, 409, GroupLayout.PREFERRED_SIZE)
+         							.addGap(18)
+         							.addComponent(addButton, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+         							.addPreferredGap(ComponentPlacement.UNRELATED)
+         							.addComponent(editButton, GroupLayout.DEFAULT_SIZE, 81, Short.MAX_VALUE)
+         							.addPreferredGap(ComponentPlacement.UNRELATED)
+         							.addComponent(deleteButton, GroupLayout.DEFAULT_SIZE, 83, Short.MAX_VALUE))
+         						.addGroup(bgLayout.createSequentialGroup()
+         							.addComponent(bookSearch, 601, 601, 601)
+         							.addPreferredGap(ComponentPlacement.RELATED)
+         							.addComponent(searchButton))
+         						.addComponent(jScrollPane1, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 696, Short.MAX_VALUE))
+         					.addGap(50))))
          );
          bgLayout.setVerticalGroup(
-             bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-             .addGroup(bgLayout.createSequentialGroup()
-                 .addContainerGap()
-                 .addComponent(title, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                 .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                     .addComponent(bookSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                     .addComponent(searchButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 278, Short.MAX_VALUE)
-                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                 .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                     .addComponent(deleteButton)
-                     .addComponent(editButton)
-                     .addComponent(addButton))
-                 .addGap(25, 25, 25))
+         	bgLayout.createParallelGroup(Alignment.LEADING)
+         		.addGroup(bgLayout.createSequentialGroup()
+         			.addContainerGap()
+         			.addComponent(title, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+         			.addPreferredGap(ComponentPlacement.RELATED)
+         			.addGroup(bgLayout.createParallelGroup(Alignment.TRAILING)
+         				.addComponent(bookSearch, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
+         				.addComponent(searchButton, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE))
+         			.addPreferredGap(ComponentPlacement.UNRELATED)
+         			.addComponent(jScrollPane1, GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE)
+         			.addPreferredGap(ComponentPlacement.UNRELATED)
+         			.addGroup(bgLayout.createParallelGroup(Alignment.LEADING)
+         				.addGroup(bgLayout.createParallelGroup(Alignment.BASELINE)
+         					.addComponent(deleteButton)
+         					.addComponent(editButton)
+         					.addComponent(addButton))
+         				.addComponent(extraPanel, GroupLayout.PREFERRED_SIZE, 48, GroupLayout.PREFERRED_SIZE))
+         			.addContainerGap())
          );
+         extraPanel.setLayout(new BorderLayout(0, 0));
+         bg.setLayout(bgLayout);
 
          javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
          this.setLayout(layout);
@@ -274,5 +291,9 @@ public class Books extends javax.swing.JPanel {
     private javax.swing.JTable jTable1;
     private javax.swing.JButton searchButton;
     private javax.swing.JLabel title;
-    // End of variables declaration//GEN-END:variables
+    private JLabel lblNewLabel;
+    private JPanel extraPanel;
+	protected JPanel getExtraPanel() {
+		return extraPanel;
+	}
 }

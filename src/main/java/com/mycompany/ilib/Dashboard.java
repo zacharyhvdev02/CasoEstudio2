@@ -61,7 +61,7 @@ public class Dashboard extends javax.swing.JFrame {
         p.setLocation(0,0);
         
         content.removeAll();
-        content.add(p, BorderLayout.CENTER);
+        content.add(p, BorderLayout.SOUTH);
         content.revalidate();
         content.repaint();
     }

@@ -103,6 +103,7 @@ public class DAOBooksImpl extends Database implements DAOBooks {
                 book.setStock(rs.getInt("stock"));
                 book.setAvailable(rs.getInt("available"));
                 book.setState(rs.getInt("state"));
+                book.setCreatedDate(rs.getDate("Created"));
                 lista.add(book);
             }
             rs.close();
