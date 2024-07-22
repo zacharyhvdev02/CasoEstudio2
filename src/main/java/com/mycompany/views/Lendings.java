@@ -2,6 +2,7 @@ package com.mycompany.views;
 
 import com.mycompany.Commands.Command;
 import com.mycompany.Commands.ConcreteCommands.BookLendingCommand;
+import com.mycompany.Commands.ConcreteCommands.BookStockCommand;
 import com.mycompany.Commands.ConcreteCommands.UserLendingCommand;
 import com.mycompany.ilib.DAOBooksImpl;
 import com.mycompany.ilib.DAOLendingsImpl;
@@ -200,6 +201,9 @@ public class Lendings extends javax.swing.JPanel {
             // Modificamos el libro restandole 1 en disponibilidad.
             currentBook.setAvailable(currentBook.getAvailable() - 1);
             daoBooks.modificar(currentBook);
+
+            Command stockCommand = new BookStockCommand(currentBook);
+            stockCommand.execute();
             
             javax.swing.JOptionPane.showMessageDialog(this, "Libro ID: " + currentBook.getId() + " prestado exitosamente a " + currentUser.getName() + ".\n", "AVISO", javax.swing.JOptionPane.INFORMATION_MESSAGE);
             folioTxt.setText("");
