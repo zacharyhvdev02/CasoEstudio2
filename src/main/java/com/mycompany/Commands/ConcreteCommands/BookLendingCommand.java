@@ -4,7 +4,6 @@ import com.mycompany.Commands.Command;
 import com.mycompany.models.Books;
 
 import javax.swing.*;
-import java.sql.SQLException;
 
 public class BookLendingCommand implements Command {
     private final Books _book;
