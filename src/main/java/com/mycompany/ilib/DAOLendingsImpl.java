@@ -7,6 +7,7 @@ import com.mycompany.models.Lendings;
 import com.mycompany.models.Users;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import com.mycompany.observer.StockObserver;
@@ -107,6 +108,30 @@ public class DAOLendingsImpl extends Database implements DAOLendings {
             this.Cerrar();
         }
         return lista;
+    }
+
+    public int getUserLendings (Users user) throws SQLException, ClassNotFoundException {
+        int userLendings = 0;
+        try {
+            this.Conectar();
+            PreparedStatement st = this.conexion.prepareStatement("SELECT COUNT(user_id) FROM lendings " +
+                    "WHERE user_id = " + user.getId());
+
+            ResultSet rs = st.executeQuery();
+            if (rs.next()) {
+                userLendings = rs.getInt(1);
+            }
+
+            System.out.println(userLendings);
+            rs.close();
+            st.close();
+
+            return userLendings;
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            this.Cerrar();
+        }
     }
 
 }

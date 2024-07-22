@@ -1,5 +1,9 @@
 package com.mycompany.views;
 
+import com.mycompany.Commands.Command;
+import com.mycompany.Commands.ConcreteCommands.BookLendingCommand;
+import com.mycompany.Commands.ConcreteCommands.BookStockCommand;
+import com.mycompany.Commands.ConcreteCommands.UserLendingCommand;
 import com.mycompany.ilib.DAOBooksImpl;
 import com.mycompany.ilib.DAOLendingsImpl;
 import com.mycompany.ilib.DAOUsersImpl;
@@ -7,7 +11,8 @@ import com.mycompany.interfaces.DAOBooks;
 import com.mycompany.interfaces.DAOLendings;
 import com.mycompany.interfaces.DAOUsers;
 import com.mycompany.utils.Utils;
-import java.awt.Color;
+
+import java.awt.*;
 
 public class Lendings extends javax.swing.JPanel {
 
@@ -58,7 +63,7 @@ public class Lendings extends javax.swing.JPanel {
         libroIdLbl.setText("Libro ID");
 
         button.setBackground(new java.awt.Color(18, 90, 173));
-        button.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        button.setFont(new java.awt.Font("Segoe UI", Font.BOLD, 18)); // NOI18N
         button.setForeground(new java.awt.Color(255, 255, 255));
         button.setText("Prestar");
         button.setBorderPainted(false);
@@ -156,6 +161,9 @@ public class Lendings extends javax.swing.JPanel {
                 folioTxt.requestFocus();
                 return;
             }
+
+            Command userLendingCommand = new UserLendingCommand(currentUser);
+            userLendingCommand.execute();
             
             DAOBooks daoBooks = new DAOBooksImpl();
             
@@ -168,7 +176,8 @@ public class Lendings extends javax.swing.JPanel {
             }
             // Validamos disponibilidad del libro.
             else if (currentBook.getAvailable() < 1) {
-                javax.swing.JOptionPane.showMessageDialog(this, "Ya no hay más libros disponibles con esa ID para prestar. \n", "AVISO", javax.swing.JOptionPane.ERROR_MESSAGE);
+                Command bookLendingCommand = new BookLendingCommand(currentBook);
+                bookLendingCommand.execute();
                 libroIdTxt.requestFocus();
                 return;
             }
@@ -193,6 +202,9 @@ public class Lendings extends javax.swing.JPanel {
             // Modificamos el libro restandole 1 en disponibilidad.
             currentBook.setAvailable(currentBook.getAvailable() - 1);
             daoBooks.modificar(currentBook);
+
+            Command stockCommand = new BookStockCommand(currentBook);
+            stockCommand.execute();
             
             javax.swing.JOptionPane.showMessageDialog(this, "Libro ID: " + currentBook.getId() + " prestado exitosamente a " + currentUser.getName() + ".\n", "AVISO", javax.swing.JOptionPane.INFORMATION_MESSAGE);
             folioTxt.setText("");

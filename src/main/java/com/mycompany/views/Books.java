@@ -1,17 +1,18 @@
 package com.mycompany.views;
 
+import com.mycompany.Commands.Command;
+import com.mycompany.Commands.ConcreteCommands.BookStatusCommand;
 import com.mycompany.ilib.DAOBooksImpl;
 import com.mycompany.ilib.Dashboard;
 import com.mycompany.interfaces.DAOBooks;
-import java.awt.Color;
+
+import java.awt.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JLabel;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.GroupLayout;
 import javax.swing.LayoutStyle.ComponentPlacement;
-import javax.swing.JTextPane;
 import javax.swing.JPanel;
-import java.awt.BorderLayout;
 
 public class Books extends javax.swing.JPanel {
 
@@ -76,6 +77,7 @@ public class Books extends javax.swing.JPanel {
          searchButton = new javax.swing.JButton();
          deleteButton = new javax.swing.JButton();
          editButton = new javax.swing.JButton();
+         statusButton = new javax.swing.JButton();
          addButton = new javax.swing.JButton();
          jScrollPane1 = new javax.swing.JScrollPane();
          jTable1 = new javax.swing.JTable();
@@ -87,7 +89,7 @@ public class Books extends javax.swing.JPanel {
          title.setText("Libros");
 
          searchButton.setBackground(new java.awt.Color(18, 90, 173));
-         searchButton.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+         searchButton.setFont(new java.awt.Font("Segoe UI", Font.BOLD, 18)); // NOI18N
          searchButton.setForeground(new java.awt.Color(255, 255, 255));
          searchButton.setText("Buscar");
          searchButton.setBorderPainted(false);
@@ -98,8 +100,24 @@ public class Books extends javax.swing.JPanel {
              }
          });
 
+        statusButton.setBackground(new java.awt.Color(18, 90, 173));
+        statusButton.setFont(new java.awt.Font("Segoe UI", Font.BOLD, 18)); // NOI18N
+        statusButton.setForeground(new java.awt.Color(255, 255, 255));
+        statusButton.setText("Estado");
+        statusButton.setBorderPainted(false);
+        statusButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        statusButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                try {
+                    statusButtonActionPerformed(evt);
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
+
          deleteButton.setBackground(new java.awt.Color(18, 90, 173));
-         deleteButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+         deleteButton.setFont(new java.awt.Font("Segoe UI", Font.PLAIN, 18)); // NOI18N
          deleteButton.setForeground(new java.awt.Color(255, 255, 255));
          deleteButton.setText("Borrar");
          deleteButton.setBorderPainted(false);
@@ -111,7 +129,7 @@ public class Books extends javax.swing.JPanel {
          });
 
          editButton.setBackground(new java.awt.Color(18, 90, 173));
-         editButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+         editButton.setFont(new java.awt.Font("Segoe UI", Font.PLAIN, 18)); // NOI18N
          editButton.setForeground(new java.awt.Color(255, 255, 255));
          editButton.setText("Editar");
          editButton.setBorderPainted(false);
@@ -123,7 +141,7 @@ public class Books extends javax.swing.JPanel {
          });
 
          addButton.setBackground(new java.awt.Color(18, 90, 173));
-         addButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+         addButton.setFont(new java.awt.Font("Segoe UI", Font.PLAIN, 18)); // NOI18N
          addButton.setForeground(new java.awt.Color(255, 255, 255));
          addButton.setText("Nuevo");
          addButton.setBorderPainted(false);
@@ -134,7 +152,7 @@ public class Books extends javax.swing.JPanel {
              }
          });
 
-         jTable1.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
+         jTable1.setFont(new java.awt.Font("Segoe UI", Font.PLAIN, 11)); // NOI18N
          jTable1.setModel(new javax.swing.table.DefaultTableModel(
              new Object [][] {
 
@@ -144,10 +162,10 @@ public class Books extends javax.swing.JPanel {
              }
          ) {
              Class[] types = new Class [] {
-                 java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
+                 java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
              };
              boolean[] canEdit = new boolean [] {
-                 false, true, true, true, true, true, true, true, true, true, true, true
+                 false, true, true, true, true, true, true, true, true, true, true, true, true
              };
 
              public Class getColumnClass(int columnIndex) {
@@ -191,6 +209,8 @@ public class Books extends javax.swing.JPanel {
          						.addGroup(bgLayout.createSequentialGroup()
          							.addComponent(bookSearch, 601, 601, 601)
          							.addPreferredGap(ComponentPlacement.RELATED)
+                                    .addComponent(statusButton, javax.swing.GroupLayout.DEFAULT_SIZE, 84, Short.MAX_VALUE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
          							.addComponent(searchButton))
          						.addComponent(jScrollPane1, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 696, Short.MAX_VALUE))
          					.addGap(50))))
@@ -211,6 +231,7 @@ public class Books extends javax.swing.JPanel {
          				.addGroup(bgLayout.createParallelGroup(Alignment.BASELINE)
          					.addComponent(deleteButton)
          					.addComponent(editButton)
+                            .addComponent(statusButton)
          					.addComponent(addButton))
          				.addComponent(extraPanel, GroupLayout.PREFERRED_SIZE, 48, GroupLayout.PREFERRED_SIZE))
          			.addContainerGap())
@@ -280,6 +301,25 @@ public class Books extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_searchButtonActionPerformed
 
+    private void statusButtonActionPerformed(java.awt.event.ActionEvent evt) throws Exception {
+        DAOBooks dao = new DAOBooksImpl();
+        if (jTable1.getSelectedRows().length < 1) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Debes seleccionar uno o más libros.\n", "AVISO", javax.swing.JOptionPane.ERROR_MESSAGE);
+        } else {
+            for (int i : jTable1.getSelectedRows()) {
+                try {
+                    int bookId = (int) jTable1.getValueAt(i, 0);
+                    com.mycompany.models.Books book = dao.getBookById(bookId);
+
+                    Command statusCommand = new BookStatusCommand(book);
+                    statusCommand.execute();
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                }
+            }
+        }
+    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addButton;
@@ -287,6 +327,7 @@ public class Books extends javax.swing.JPanel {
     private javax.swing.JTextField bookSearch;
     private javax.swing.JButton deleteButton;
     private javax.swing.JButton editButton;
+    private javax.swing.JButton statusButton;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JButton searchButton;
