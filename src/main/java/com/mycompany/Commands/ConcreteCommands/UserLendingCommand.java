@@ -9,7 +9,7 @@ import javax.swing.*;
 import java.sql.SQLException;
 
 public class UserLendingCommand implements Command {
-    private Users _user;
+    private final Users _user;
 
     public UserLendingCommand(Users user) {
         this._user = user;

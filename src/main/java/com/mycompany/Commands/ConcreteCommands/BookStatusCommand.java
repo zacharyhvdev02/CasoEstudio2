@@ -15,7 +15,6 @@ public class BookStatusCommand implements Command {
 
     @Override
     public void execute() {
-        com.mycompany.views.Books component = new com.mycompany.views.Books();
         if (_book.getState() == BookState.Bueno) {
             JOptionPane.showMessageDialog(null, "El estado del libro es bueno.\n", "AVISO", JOptionPane.INFORMATION_MESSAGE);
         } else if (_book.getState() == BookState.Malo){

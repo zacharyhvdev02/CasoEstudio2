@@ -6,7 +6,7 @@ import com.mycompany.models.Books;
 import javax.swing.*;
 
 public class BookStockCommand implements Command {
-    private Books _book;
+    private final Books _book;
 
     public BookStockCommand(Books book) {
         this._book = book;

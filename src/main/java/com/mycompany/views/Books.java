@@ -5,15 +5,14 @@ import com.mycompany.Commands.ConcreteCommands.BookStatusCommand;
 import com.mycompany.ilib.DAOBooksImpl;
 import com.mycompany.ilib.Dashboard;
 import com.mycompany.interfaces.DAOBooks;
-import java.awt.Color;
+
+import java.awt.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JLabel;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.GroupLayout;
 import javax.swing.LayoutStyle.ComponentPlacement;
-import javax.swing.JTextPane;
 import javax.swing.JPanel;
-import java.awt.BorderLayout;
 
 public class Books extends javax.swing.JPanel {
 
@@ -78,6 +77,7 @@ public class Books extends javax.swing.JPanel {
          searchButton = new javax.swing.JButton();
          deleteButton = new javax.swing.JButton();
          editButton = new javax.swing.JButton();
+         statusButton = new javax.swing.JButton();
          addButton = new javax.swing.JButton();
          jScrollPane1 = new javax.swing.JScrollPane();
          jTable1 = new javax.swing.JTable();
@@ -89,7 +89,7 @@ public class Books extends javax.swing.JPanel {
          title.setText("Libros");
 
          searchButton.setBackground(new java.awt.Color(18, 90, 173));
-         searchButton.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+         searchButton.setFont(new java.awt.Font("Segoe UI", Font.BOLD, 18)); // NOI18N
          searchButton.setForeground(new java.awt.Color(255, 255, 255));
          searchButton.setText("Buscar");
          searchButton.setBorderPainted(false);
@@ -101,7 +101,7 @@ public class Books extends javax.swing.JPanel {
          });
 
         statusButton.setBackground(new java.awt.Color(18, 90, 173));
-        statusButton.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        statusButton.setFont(new java.awt.Font("Segoe UI", Font.BOLD, 18)); // NOI18N
         statusButton.setForeground(new java.awt.Color(255, 255, 255));
         statusButton.setText("Estado");
         statusButton.setBorderPainted(false);
@@ -117,7 +117,7 @@ public class Books extends javax.swing.JPanel {
         });
 
          deleteButton.setBackground(new java.awt.Color(18, 90, 173));
-         deleteButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+         deleteButton.setFont(new java.awt.Font("Segoe UI", Font.PLAIN, 18)); // NOI18N
          deleteButton.setForeground(new java.awt.Color(255, 255, 255));
          deleteButton.setText("Borrar");
          deleteButton.setBorderPainted(false);
@@ -129,7 +129,7 @@ public class Books extends javax.swing.JPanel {
          });
 
          editButton.setBackground(new java.awt.Color(18, 90, 173));
-         editButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+         editButton.setFont(new java.awt.Font("Segoe UI", Font.PLAIN, 18)); // NOI18N
          editButton.setForeground(new java.awt.Color(255, 255, 255));
          editButton.setText("Editar");
          editButton.setBorderPainted(false);
@@ -141,7 +141,7 @@ public class Books extends javax.swing.JPanel {
          });
 
          addButton.setBackground(new java.awt.Color(18, 90, 173));
-         addButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+         addButton.setFont(new java.awt.Font("Segoe UI", Font.PLAIN, 18)); // NOI18N
          addButton.setForeground(new java.awt.Color(255, 255, 255));
          addButton.setText("Nuevo");
          addButton.setBorderPainted(false);
@@ -152,7 +152,7 @@ public class Books extends javax.swing.JPanel {
              }
          });
 
-         jTable1.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
+         jTable1.setFont(new java.awt.Font("Segoe UI", Font.PLAIN, 11)); // NOI18N
          jTable1.setModel(new javax.swing.table.DefaultTableModel(
              new Object [][] {
 

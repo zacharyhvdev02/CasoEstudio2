@@ -11,7 +11,8 @@ import com.mycompany.interfaces.DAOBooks;
 import com.mycompany.interfaces.DAOLendings;
 import com.mycompany.interfaces.DAOUsers;
 import com.mycompany.utils.Utils;
-import java.awt.Color;
+
+import java.awt.*;
 
 public class Lendings extends javax.swing.JPanel {
 
@@ -62,7 +63,7 @@ public class Lendings extends javax.swing.JPanel {
         libroIdLbl.setText("Libro ID");
 
         button.setBackground(new java.awt.Color(18, 90, 173));
-        button.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        button.setFont(new java.awt.Font("Segoe UI", Font.BOLD, 18)); // NOI18N
         button.setForeground(new java.awt.Color(255, 255, 255));
         button.setText("Prestar");
         button.setBorderPainted(false);
