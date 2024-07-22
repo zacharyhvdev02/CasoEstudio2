@@ -1,5 +1,8 @@
 package com.mycompany.views;
 
+import com.mycompany.Commands.Command;
+import com.mycompany.Commands.ConcreteCommands.BookLendingCommand;
+import com.mycompany.Commands.ConcreteCommands.UserLendingCommand;
 import com.mycompany.ilib.DAOBooksImpl;
 import com.mycompany.ilib.DAOLendingsImpl;
 import com.mycompany.ilib.DAOUsersImpl;
@@ -156,6 +159,9 @@ public class Lendings extends javax.swing.JPanel {
                 folioTxt.requestFocus();
                 return;
             }
+
+            Command userLendingCommand = new UserLendingCommand(currentUser);
+            userLendingCommand.execute();
             
             DAOBooks daoBooks = new DAOBooksImpl();
             
@@ -168,7 +174,8 @@ public class Lendings extends javax.swing.JPanel {
             }
             // Validamos disponibilidad del libro.
             else if (currentBook.getAvailable() < 1) {
-                javax.swing.JOptionPane.showMessageDialog(this, "Ya no hay más libros disponibles con esa ID para prestar. \n", "AVISO", javax.swing.JOptionPane.ERROR_MESSAGE);
+                Command bookLendingCommand = new BookLendingCommand(currentBook);
+                bookLendingCommand.execute();
                 libroIdTxt.requestFocus();
                 return;
             }
