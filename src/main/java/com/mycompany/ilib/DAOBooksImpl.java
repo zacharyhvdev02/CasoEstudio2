@@ -111,7 +111,7 @@ public class DAOBooksImpl extends Database implements DAOBooks {
                 book.setStock(rs.getInt("stock"));
                 book.setAvailable(rs.getInt("available"));
                 book.setState(BookState.from(rs.getInt("state")));
-                book.setCreatedDate(rs.getDate("created_date"));
+                book.setCreatedDate(rs.getDate("created"));
                 lista.add(book);
             }
             rs.close();
@@ -147,7 +147,7 @@ public class DAOBooksImpl extends Database implements DAOBooks {
                 book.setStock(rs.getInt("stock"));
                 book.setAvailable(rs.getInt("available"));
                 book.setState(BookState.from(rs.getInt("state")));
-                book.setCreatedDate(rs.getDate("created_date"));
+                book.setCreatedDate(rs.getDate("Created"));
             }
             rs.close();
             st.close();

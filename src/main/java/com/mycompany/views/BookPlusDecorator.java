@@ -202,8 +202,4 @@ public class BookPlusDecorator extends BooksDecorator {
     	    }
     	});
     }
-    
-    private void LoadComments() {
-    	
-    }
 }
