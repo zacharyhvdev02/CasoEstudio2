@@ -1,14 +1,15 @@
 package com.mycompany.ilib;
 
-import com.mycompany.db.Database;
-import com.mycompany.interfaces.DAOBooks;
-import com.mycompany.models.BookState;
-import com.mycompany.models.Books;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.mycompany.db.Database;
+import com.mycompany.interfaces.DAOBooks;
+import com.mycompany.models.BookState;
+import com.mycompany.models.Books;
 
 public class DAOBooksImpl extends Database implements DAOBooks {
 
@@ -17,8 +18,32 @@ public class DAOBooksImpl extends Database implements DAOBooks {
         try {
             this.Conectar();
             PreparedStatement st = this.conexion.prepareStatement(
-                    "INSERT INTO books (title, date, author, category, edit, lang, pages, description, ejemplares, stock, available, state, created) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);"
-            );
+                    "INSERT INTO books (title, date, author, category, edit, lang, pages, description, ejemplares, stock, available) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);");
+            st.setString(1, book.getTitle());
+            st.setString(2, book.getDate());
+            st.setString(3, book.getAuthor());
+            st.setString(4, book.getCategory());
+            st.setString(5, book.getEdit());
+            st.setString(6, book.getLang());
+            st.setString(7, book.getPages());
+            st.setString(8, book.getDescription());
+            st.setString(9, book.getEjemplares());
+            st.setInt(10, book.getStock());
+            st.setInt(11, book.getAvailable());
+            st.executeUpdate();
+            st.close();
+        } catch (SQLException e) {
+            throw e;
+        } finally {
+            this.Cerrar();
+        }
+    }
+
+    public void registrarPlus(Books book) throws Exception {
+        try {
+            this.Conectar();
+            PreparedStatement st = this.conexion.prepareStatement(
+                    "INSERT INTO books (title, date, author, category, edit, lang, pages, description, ejemplares, stock, available, state) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);");
             st.setString(1, book.getTitle());
             st.setString(2, book.getDate());
             st.setString(3, book.getAuthor());
@@ -31,7 +56,6 @@ public class DAOBooksImpl extends Database implements DAOBooks {
             st.setInt(10, book.getStock());
             st.setInt(11, book.getAvailable());
             st.setInt(12, book.getState().getValue());
-            st.setDate(13, new java.sql.Date(book.getCreatedDate().getTime()));
             st.executeUpdate();
             st.close();
         } catch (SQLException e) {
@@ -46,8 +70,7 @@ public class DAOBooksImpl extends Database implements DAOBooks {
         try {
             this.Conectar();
             PreparedStatement st = this.conexion.prepareStatement(
-                    "UPDATE books SET title = ?, date = ?, author = ?, category = ?, edit = ?, lang = ?, pages = ?, description = ?, ejemplares = ?, stock = ?, available = ?, state = ? WHERE id = ?;"
-            );
+                    "UPDATE books SET title = ?, date = ?, author = ?, category = ?, edit = ?, lang = ?, pages = ?, description = ?, ejemplares = ?, stock = ?, available = ?, state = ? WHERE id = ?;");
             st.setString(1, book.getTitle());
             st.setString(2, book.getDate());
             st.setString(3, book.getAuthor());
@@ -111,7 +134,7 @@ public class DAOBooksImpl extends Database implements DAOBooks {
                 book.setStock(rs.getInt("stock"));
                 book.setAvailable(rs.getInt("available"));
                 book.setState(BookState.from(rs.getInt("state")));
-                book.setCreatedDate(rs.getDate("created"));
+                book.setCreatedDate(rs.getDate("Created"));
                 lista.add(book);
             }
             rs.close();
@@ -147,7 +170,7 @@ public class DAOBooksImpl extends Database implements DAOBooks {
                 book.setStock(rs.getInt("stock"));
                 book.setAvailable(rs.getInt("available"));
                 book.setState(BookState.from(rs.getInt("state")));
-                book.setCreatedDate(rs.getDate("created"));
+                book.setCreatedDate(rs.getDate("Created"));
             }
             rs.close();
             st.close();
