@@ -372,10 +372,10 @@ public class UpBooksPlus extends javax.swing.JPanel {
         book.setState(BookState.from(estado));
 
         try {
-            DAOBooks dao = new DAOBooksImpl();
+            DAOBooksImpl dao = new DAOBooksImpl();
 
             if (!isEdition) {
-                dao.registrar(book);
+                dao.registrarPlus(book);
             } else {
                 dao.modificar(book);
             }

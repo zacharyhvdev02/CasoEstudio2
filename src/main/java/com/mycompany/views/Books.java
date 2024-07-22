@@ -194,25 +194,25 @@ public class Books extends javax.swing.JPanel {
          			.addContainerGap()
          			.addGroup(bgLayout.createParallelGroup(Alignment.TRAILING)
          				.addGroup(bgLayout.createSequentialGroup()
-         					.addComponent(title, GroupLayout.DEFAULT_SIZE, 47, Short.MAX_VALUE)
+         					.addComponent(title, GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE)
          					.addGap(699))
          				.addGroup(bgLayout.createSequentialGroup()
          					.addGroup(bgLayout.createParallelGroup(Alignment.TRAILING)
          						.addGroup(bgLayout.createSequentialGroup()
          							.addComponent(extraPanel, GroupLayout.PREFERRED_SIZE, 409, GroupLayout.PREFERRED_SIZE)
          							.addGap(18)
-         							.addComponent(addButton, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+         							.addComponent(addButton, GroupLayout.DEFAULT_SIZE, 118, Short.MAX_VALUE)
          							.addPreferredGap(ComponentPlacement.UNRELATED)
-         							.addComponent(editButton, GroupLayout.DEFAULT_SIZE, 81, Short.MAX_VALUE)
+         							.addComponent(editButton, GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE)
          							.addPreferredGap(ComponentPlacement.UNRELATED)
-         							.addComponent(deleteButton, GroupLayout.DEFAULT_SIZE, 83, Short.MAX_VALUE))
+         							.addComponent(deleteButton, GroupLayout.DEFAULT_SIZE, 116, Short.MAX_VALUE))
          						.addGroup(bgLayout.createSequentialGroup()
          							.addComponent(bookSearch, 601, 601, 601)
          							.addPreferredGap(ComponentPlacement.RELATED)
-                                    .addComponent(statusButton, javax.swing.GroupLayout.DEFAULT_SIZE, 84, Short.MAX_VALUE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+         							.addComponent(statusButton, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+         							.addPreferredGap(ComponentPlacement.UNRELATED)
          							.addComponent(searchButton))
-         						.addComponent(jScrollPane1, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 696, Short.MAX_VALUE))
+         						.addComponent(jScrollPane1, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 795, Short.MAX_VALUE))
          					.addGap(50))))
          );
          bgLayout.setVerticalGroup(
@@ -223,7 +223,9 @@ public class Books extends javax.swing.JPanel {
          			.addPreferredGap(ComponentPlacement.RELATED)
          			.addGroup(bgLayout.createParallelGroup(Alignment.TRAILING)
          				.addComponent(bookSearch, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
-         				.addComponent(searchButton, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE))
+         				.addGroup(bgLayout.createParallelGroup(Alignment.BASELINE)
+         					.addComponent(searchButton, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
+         					.addComponent(statusButton)))
          			.addPreferredGap(ComponentPlacement.UNRELATED)
          			.addComponent(jScrollPane1, GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE)
          			.addPreferredGap(ComponentPlacement.UNRELATED)
@@ -231,7 +233,6 @@ public class Books extends javax.swing.JPanel {
          				.addGroup(bgLayout.createParallelGroup(Alignment.BASELINE)
          					.addComponent(deleteButton)
          					.addComponent(editButton)
-                            .addComponent(statusButton)
          					.addComponent(addButton))
          				.addComponent(extraPanel, GroupLayout.PREFERRED_SIZE, 48, GroupLayout.PREFERRED_SIZE))
          			.addContainerGap())
@@ -308,7 +309,7 @@ public class Books extends javax.swing.JPanel {
         } else {
             for (int i : jTable1.getSelectedRows()) {
                 try {
-                    int bookId = (int) jTable1.getValueAt(i, 0);
+                    int bookId = (int) jTable1.getValueAt(i, 1);
                     com.mycompany.models.Books book = dao.getBookById(bookId);
 
                     Command statusCommand = new BookStatusCommand(book);

@@ -14,6 +14,7 @@ import java.util.Locale;
 import javax.swing.JPanel;
 
 import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatMaterialLighterIJTheme;
+import com.mycompany.views.BookPlusDecorator;
 import com.mycompany.views.Books;
 import com.mycompany.views.Lendings;
 import com.mycompany.views.Principal;
@@ -445,7 +446,10 @@ public class Dashboard extends javax.swing.JFrame {
         }// GEN-LAST:event_btn_reportsActionPerformed
 
         private void btn_booksActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btn_booksActionPerformed
-                ShowJPanel(new Books());
+        	BookPlusDecorator books = new BookPlusDecorator(new Books());
+        	//Books books = new Books();
+        	books.Init();
+            ShowJPanel(books.getPanel());
         }// GEN-LAST:event_btn_booksActionPerformed
 
         private void btn_usersActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btn_usersActionPerformed
