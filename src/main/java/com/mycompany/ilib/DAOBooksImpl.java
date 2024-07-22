@@ -17,7 +17,7 @@ public class DAOBooksImpl extends Database implements DAOBooks {
         try {
             this.Conectar();
             PreparedStatement st = this.conexion.prepareStatement(
-                    "INSERT INTO books (title, date, author, category, edit, lang, pages, description, ejemplares, stock, available, state, created_date) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);"
+                    "INSERT INTO books (title, date, author, category, edit, lang, pages, description, ejemplares, stock, available, state, created) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);"
             );
             st.setString(1, book.getTitle());
             st.setString(2, book.getDate());
@@ -111,7 +111,7 @@ public class DAOBooksImpl extends Database implements DAOBooks {
                 book.setStock(rs.getInt("stock"));
                 book.setAvailable(rs.getInt("available"));
                 book.setState(BookState.from(rs.getInt("state")));
-                book.setCreatedDate(rs.getDate("created_date"));
+                book.setCreatedDate(rs.getDate("created"));
                 lista.add(book);
             }
             rs.close();
@@ -147,7 +147,7 @@ public class DAOBooksImpl extends Database implements DAOBooks {
                 book.setStock(rs.getInt("stock"));
                 book.setAvailable(rs.getInt("available"));
                 book.setState(BookState.from(rs.getInt("state")));
-                book.setCreatedDate(rs.getDate("created_date"));
+                book.setCreatedDate(rs.getDate("created"));
             }
             rs.close();
             st.close();

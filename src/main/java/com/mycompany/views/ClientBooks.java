@@ -4,12 +4,10 @@ import java.awt.Color;
 
 import javax.swing.table.DefaultTableModel;
 
-import com.mycompany.ilib.DAOBooksImpl;
+import com.mycompany.ilib.ClientSession;
 import com.mycompany.ilib.UserFacade;
-import com.mycompany.interfaces.DAOBooks;
 
 public class ClientBooks extends javax.swing.JPanel {
-
     public ClientBooks(boolean availableBooks) {
         initComponents();
         InitStyles();
@@ -37,14 +35,17 @@ public class ClientBooks extends javax.swing.JPanel {
             UserFacade userFacade = new UserFacade();
             DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
             model.setRowCount(0);
+
+            int userId = ClientSession.getInstance().getUserId();
+
             if (userBooks) {
-                userFacade.getAvailableBooks("")
+                userFacade.getAvailableBooks(userId, "")
                         .forEach((u) -> model.addRow(new Object[] { u.getId(), u.getTitle(), u.getDate(),
                                 u.getAuthor(), u.getCategory(), u.getEdit(), u.getLang(), u.getPages(),
                                 u.getDescription(),
                                 u.getEjemplares(), u.getStock(), u.getAvailable() }));
             } else {
-                userFacade.getLentBooks(1)
+                userFacade.getLentBooks(userId)
                         .forEach((u) -> model.addRow(new Object[] { u.getId(), u.getTitle(), u.getDate(),
                                 u.getAuthor(), u.getCategory(), u.getEdit(), u.getLang(), u.getPages(),
                                 u.getDescription(),
@@ -62,7 +63,8 @@ public class ClientBooks extends javax.swing.JPanel {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated
+    // Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         bg = new javax.swing.JPanel();
@@ -118,26 +120,28 @@ public class ClientBooks extends javax.swing.JPanel {
 
         jTable1.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
+                new Object[][] {
 
-            },
-            new String [] {
-                "ID", "Título", "Fecha de Pub.", "Autor", "Categoría", "Edición", "Idioma", "Páginas", "Descripción", "Ejemplaresl", "Stock", "Disponibles"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
+                },
+                new String[] {
+                        "ID", "Título", "Fecha de Pub.", "Autor", "Categoría", "Edición", "Idioma", "Páginas",
+                        "Descripción", "Ejemplaresl", "Stock", "Disponibles"
+                }) {
+            Class[] types = new Class[] {
+                    java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class,
+                    java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class,
+                    java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
             };
-            boolean[] canEdit = new boolean [] {
-                false, true, true, true, true, true, true, true, true, true, true, true
+            boolean[] canEdit = new boolean[] {
+                    false, true, true, true, true, true, true, true, true, true, true, true
             };
 
             public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
+                return types[columnIndex];
             }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
+                return canEdit[columnIndex];
             }
         });
         jTable1.getTableHeader().setReorderingAllowed(false);
@@ -151,57 +155,63 @@ public class ClientBooks extends javax.swing.JPanel {
         javax.swing.GroupLayout bgLayout = new javax.swing.GroupLayout(bg);
         bg.setLayout(bgLayout);
         bgLayout.setHorizontalGroup(
-            bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(bgLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(bgLayout.createSequentialGroup()
-                        .addComponent(title, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(699, 699, 699))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, bgLayout.createSequentialGroup()
-                        .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(bgLayout.createSequentialGroup()
-                                .addGap(521, 521, 521)
-                                .addComponent(lendButton)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(returnButton))
-                            .addGroup(bgLayout.createSequentialGroup()
-                                .addComponent(bookSearch)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(searchButton)))
-                        .addGap(50, 50, 50))))
-        );
+                bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(bgLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(bgLayout.createSequentialGroup()
+                                                .addComponent(title, javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                        javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addGap(699, 699, 699))
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, bgLayout
+                                                .createSequentialGroup()
+                                                .addGroup(bgLayout
+                                                        .createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                        .addComponent(jScrollPane1,
+                                                                javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addGroup(bgLayout.createSequentialGroup()
+                                                                .addGap(521, 521, 521)
+                                                                .addComponent(lendButton)
+                                                                .addPreferredGap(
+                                                                        javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                                .addComponent(returnButton))
+                                                        .addGroup(bgLayout.createSequentialGroup()
+                                                                .addComponent(bookSearch)
+                                                                .addPreferredGap(
+                                                                        javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                                .addComponent(searchButton)))
+                                                .addGap(50, 50, 50)))));
         bgLayout.setVerticalGroup(
-            bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(bgLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(title, javax.swing.GroupLayout.DEFAULT_SIZE, 15, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(bookSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(searchButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 278, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(returnButton)
-                    .addComponent(lendButton))
-                .addGap(25, 25, 25))
-        );
+                bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(bgLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(title, javax.swing.GroupLayout.DEFAULT_SIZE, 15, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(bookSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 40,
+                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(searchButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40,
+                                                javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 278, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(returnButton)
+                                        .addComponent(lendButton))
+                                .addGap(25, 25, 25)));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-        );
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE,
+                                        javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addContainerGap()));
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
+                                Short.MAX_VALUE));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTable1MousePressed(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jTable1MousePressed
@@ -209,16 +219,15 @@ public class ClientBooks extends javax.swing.JPanel {
     }// GEN-LAST:event_jTable1MousePressed
 
     private void returnButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_returnButtonActionPerformed
-        DAOBooks dao = new DAOBooksImpl();
-        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        UserFacade userFacade = new UserFacade();
         if (jTable1.getSelectedRows().length < 1) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Debes seleccionar uno o más libros a eliminar.\n", "AVISO",
+            javax.swing.JOptionPane.showMessageDialog(this, "Debes seleccionar un libros para devolver.\n", "AVISO",
                     javax.swing.JOptionPane.ERROR_MESSAGE);
         } else {
             for (int i : jTable1.getSelectedRows()) {
                 try {
-                    dao.eliminar((int) jTable1.getValueAt(i, 0));
-                    model.removeRow(i);
+                    userFacade.returnBook(ClientSession.getInstance().getUserId(), (int) jTable1.getValueAt(i, 0));
+                    LoadBooks(false);
                 } catch (Exception e) {
                     System.out.println(e.getMessage());
                 }
@@ -231,7 +240,7 @@ public class ClientBooks extends javax.swing.JPanel {
             try {
                 int bookId = (int) jTable1.getValueAt(jTable1.getSelectedRow(), 0);
                 UserFacade userFacade = new UserFacade();
-                userFacade.lendBook(1, bookId);
+                userFacade.lendBook(ClientSession.getInstance().getUserId(), bookId);
                 LoadBooks(true);
                 javax.swing.JOptionPane.showMessageDialog(this, "Libro reservado correctamente.\n", "AVISO",
                         javax.swing.JOptionPane.INFORMATION_MESSAGE);
@@ -249,7 +258,7 @@ public class ClientBooks extends javax.swing.JPanel {
             UserFacade userFacade = new UserFacade();
             DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
             model.setRowCount(0);
-            userFacade.getAvailableBooks(bookSearch.getText()).stream()
+            userFacade.getAvailableBooks(ClientSession.getInstance().getUserId(), bookSearch.getText()).stream()
                     .filter(book -> book.getTitle().contains(bookSearch.getText()))
                     .forEach((u) -> model.addRow(new Object[] { u.getId(), u.getTitle(), u.getDate(), u.getAuthor(),
                             u.getCategory(), u.getEdit(), u.getLang(), u.getPages(), u.getDescription(),

@@ -17,6 +17,7 @@ public class Books extends javax.swing.JPanel {
 
     public Books() {
     	initComponents();
+    	Init();
     }
     
     public void Init() {

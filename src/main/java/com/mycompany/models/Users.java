@@ -9,6 +9,8 @@ public class Users {
     private String tel;
     private int sanctions;
     private int sanc_money;
+    private String username;
+    private String password;
 
     public void setId(int id) {
         this.id = id;
@@ -73,4 +75,20 @@ public class Users {
     public int getSanc_money() {
         return sanc_money;
     }
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
 }

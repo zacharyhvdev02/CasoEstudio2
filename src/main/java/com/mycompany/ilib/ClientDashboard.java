@@ -17,17 +17,7 @@ import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatMaterialLighte
 import com.mycompany.views.ClientBooks;
 import com.mycompany.views.Login;
 
-/**
- *
- * @author Antonio
- */
 public class ClientDashboard extends javax.swing.JFrame {
-
-        private com.mycompany.models.Users user;
-
-        /**
-         * Creates new form Dashboard
-         */
         public ClientDashboard() {
                 initComponents();
                 InitStyles();
@@ -59,31 +49,28 @@ public class ClientDashboard extends javax.swing.JFrame {
                 HideLoggedInButtons();
         }
 
-        public void SetUser(com.mycompany.models.Users user) {
-                this.user = user;
-                ShowLoggedInButtons();
+        private static void HideLoggedInButtons() {
+                btn_logout.setVisible(false);
+                btn_books.setVisible(false);
+                btn_lend.setVisible(false);
+                btn_login.setVisible(true);
         }
 
-        public int GetUserId() {
-                return this.user.getId();
-        }
-
-        public void HideLoggedInButtons() {
-                this.btn_logout.setVisible(false);
-                this.btn_books.setVisible(false);
-                this.btn_lend.setVisible(false);
-                this.btn_login.setVisible(true);
-        }
-
-        public void ShowLoggedInButtons() {
-                this.btn_logout.setVisible(true);
-                this.btn_books.setVisible(true);
-                this.btn_lend.setVisible(true);
-                this.btn_login.setVisible(false);
+        private static void ShowLoggedInButtons() {
+                btn_logout.setVisible(true);
+                btn_books.setVisible(true);
+                btn_lend.setVisible(true);
+                btn_login.setVisible(false);
         }
 
         public static void ShowJPanel(JPanel p) {
-                p.setSize(760, 430);
+                if (ClientSession.getInstance().getUserId() != -1) {
+                        ShowLoggedInButtons();
+                } else {
+                        HideLoggedInButtons();
+                }
+
+                p.setSize(850, 430);
                 p.setLocation(0, 0);
 
                 content.removeAll();
@@ -267,7 +254,7 @@ public class ClientDashboard extends javax.swing.JFrame {
                 header.setBackground(new java.awt.Color(25, 118, 210));
                 header.setPreferredSize(new java.awt.Dimension(744, 150));
 
-                navText.setText("Administración/Control/Biblioteca");
+                navText.setText("Cliente/Control/Biblioteca");
 
                 dateText.setText("Hoy es {dayname} {day} de {month} de {year}");
 
@@ -412,10 +399,10 @@ public class ClientDashboard extends javax.swing.JFrame {
         // Variables declaration - do not modify//GEN-BEGIN:variables
         private javax.swing.JLabel appName;
         private javax.swing.JPanel background;
-        private javax.swing.JButton btn_books;
-        private javax.swing.JButton btn_lend;
-        private javax.swing.JButton btn_login;
-        private javax.swing.JButton btn_logout;
+        private static javax.swing.JButton btn_books;
+        private static javax.swing.JButton btn_lend;
+        private static javax.swing.JButton btn_login;
+        private static javax.swing.JButton btn_logout;
         private static javax.swing.JPanel content;
         private javax.swing.JLabel dateText;
         private javax.swing.JPanel header;

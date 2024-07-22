@@ -17,12 +17,14 @@ public class DAOUsersImpl extends Database implements DAOUsers {
         try {
             this.Conectar();
             PreparedStatement st = this.conexion.prepareStatement(
-                    "INSERT INTO users(name, last_name_p, last_name_m, domicilio, tel) VALUES(?,?,?,?,?);");
+                    "INSERT INTO users(name, last_name_p, last_name_m, domicilio, tel, username, password) VALUES(?,?,?,?,?,?,?);");
             st.setString(1, user.getName());
             st.setString(2, user.getLast_name_p());
             st.setString(3, user.getLast_name_m());
             st.setString(4, user.getDomicilio());
             st.setString(5, user.getTel());
+            st.setString(6, user.getUsername());
+            st.setString(7, Utils.hashPassword(user.getPassword()));
             st.executeUpdate();
             st.close();
         } catch (Exception e) {
@@ -37,13 +39,15 @@ public class DAOUsersImpl extends Database implements DAOUsers {
         try {
             this.Conectar();
             PreparedStatement st = this.conexion.prepareStatement(
-                    "UPDATE users SET name = ?, last_name_p = ?, last_name_m = ?, domicilio = ?, tel = ? WHERE id = ?");
+                    "UPDATE users SET name = ?, last_name_p = ?, last_name_m = ?, domicilio = ?, tel = ?, username = ?, password = ? WHERE id = ?");
             st.setString(1, user.getName());
             st.setString(2, user.getLast_name_p());
             st.setString(3, user.getLast_name_m());
             st.setString(4, user.getDomicilio());
             st.setString(5, user.getTel());
-            st.setInt(6, user.getId());
+            st.setString(6, user.getUsername());
+            st.setString(7, Utils.hashPassword(user.getPassword()));
+            st.setInt(8, user.getId());
             st.executeUpdate();
             st.close();
         } catch (Exception e) {
@@ -89,6 +93,8 @@ public class DAOUsersImpl extends Database implements DAOUsers {
                 user.setTel(rs.getString("tel"));
                 user.setSanctions(rs.getInt("sanctions"));
                 user.setSanc_money(rs.getInt("sanc_money"));
+                user.setUsername(rs.getString("username"));
+                user.setPassword("");
                 lista.add(user);
             }
             rs.close();
