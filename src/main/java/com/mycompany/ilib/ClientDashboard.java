@@ -14,23 +14,21 @@ import java.util.Locale;
 import javax.swing.JPanel;
 
 import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatMaterialLighterIJTheme;
-import com.mycompany.views.Books;
-import com.mycompany.views.Lendings;
-import com.mycompany.views.Principal;
-import com.mycompany.views.Reports;
-import com.mycompany.views.Returns;
-import com.mycompany.views.Users;
+import com.mycompany.views.ClientBooks;
+import com.mycompany.views.Login;
 
 /**
  *
  * @author Antonio
  */
-public class Dashboard extends javax.swing.JFrame {
+public class ClientDashboard extends javax.swing.JFrame {
+
+        private com.mycompany.models.Users user;
 
         /**
          * Creates new form Dashboard
          */
-        public Dashboard() {
+        public ClientDashboard() {
                 initComponents();
                 InitStyles();
                 SetDate();
@@ -57,15 +55,39 @@ public class Dashboard extends javax.swing.JFrame {
         }
 
         private void InitContent() {
-                ShowJPanel(new Principal());
+                ShowJPanel(new Login());
+                HideLoggedInButtons();
+        }
+
+        public void SetUser(com.mycompany.models.Users user) {
+                this.user = user;
+                ShowLoggedInButtons();
+        }
+
+        public int GetUserId() {
+                return this.user.getId();
+        }
+
+        public void HideLoggedInButtons() {
+                this.btn_logout.setVisible(false);
+                this.btn_books.setVisible(false);
+                this.btn_lend.setVisible(false);
+                this.btn_login.setVisible(true);
+        }
+
+        public void ShowLoggedInButtons() {
+                this.btn_logout.setVisible(true);
+                this.btn_books.setVisible(true);
+                this.btn_lend.setVisible(true);
+                this.btn_login.setVisible(false);
         }
 
         public static void ShowJPanel(JPanel p) {
-                p.setSize(750, 430);
+                p.setSize(760, 430);
                 p.setLocation(0, 0);
 
                 content.removeAll();
-                content.add(p, BorderLayout.SOUTH);
+                content.add(p, BorderLayout.CENTER);
                 content.revalidate();
                 content.repaint();
         }
@@ -84,13 +106,10 @@ public class Dashboard extends javax.swing.JFrame {
                 menu = new javax.swing.JPanel();
                 appName = new javax.swing.JLabel();
                 jSeparator1 = new javax.swing.JSeparator();
-                btn_prin = new javax.swing.JButton();
-                btn_lends = new javax.swing.JButton();
-                btn_returns = new javax.swing.JButton();
-                btn_users = new javax.swing.JButton();
+                btn_login = new javax.swing.JButton();
                 btn_books = new javax.swing.JButton();
-                btn_reports = new javax.swing.JButton();
-                btn_client = new javax.swing.JButton();
+                btn_lend = new javax.swing.JButton();
+                btn_logout = new javax.swing.JButton();
                 header = new javax.swing.JPanel();
                 navText = new javax.swing.JLabel();
                 dateText = new javax.swing.JLabel();
@@ -110,87 +129,33 @@ public class Dashboard extends javax.swing.JFrame {
 
                 jSeparator1.setPreferredSize(new java.awt.Dimension(50, 5));
 
-                btn_prin.setBackground(new java.awt.Color(21, 101, 192));
-                btn_prin.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-                btn_prin.setForeground(new java.awt.Color(255, 255, 255));
-                btn_prin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/home-outline.png"))); // NOI18N
-                btn_prin.setText("Principal");
-                btn_prin.setBorder(
+                btn_login.setBackground(new java.awt.Color(21, 101, 192));
+                btn_login.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+                btn_login.setForeground(new java.awt.Color(255, 255, 255));
+                btn_login.setIcon(new javax.swing.ImageIcon(getClass().getResource("/home-outline.png"))); // NOI18N
+                btn_login.setText("Inicio de Sesión");
+                btn_login.setBorder(
                                 javax.swing.BorderFactory.createMatteBorder(1, 13, 1, 1, new java.awt.Color(0, 0, 0)));
-                btn_prin.setBorderPainted(false);
-                btn_prin.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-                btn_prin.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-                btn_prin.setIconTextGap(13);
-                btn_prin.setInheritsPopupMenu(true);
-                btn_prin.addActionListener(new java.awt.event.ActionListener() {
+                btn_login.setBorderPainted(false);
+                btn_login.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+                btn_login.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+                btn_login.setIconTextGap(13);
+                btn_login.setInheritsPopupMenu(true);
+                btn_login.addActionListener(new java.awt.event.ActionListener() {
                         public void actionPerformed(java.awt.event.ActionEvent evt) {
-                                btn_prinActionPerformed(evt);
-                        }
-                });
-
-                btn_lends.setBackground(new java.awt.Color(21, 101, 192));
-                btn_lends.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-                btn_lends.setForeground(new java.awt.Color(255, 255, 255));
-                btn_lends.setIcon(new javax.swing.ImageIcon(getClass().getResource("/calendar-plus.png"))); // NOI18N
-                btn_lends.setText("Préstamos");
-                btn_lends.setBorder(
-                                javax.swing.BorderFactory.createMatteBorder(1, 13, 1, 1, new java.awt.Color(0, 0, 0)));
-                btn_lends.setBorderPainted(false);
-                btn_lends.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-                btn_lends.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-                btn_lends.setIconTextGap(13);
-                btn_lends.setInheritsPopupMenu(true);
-                btn_lends.addActionListener(new java.awt.event.ActionListener() {
-                        public void actionPerformed(java.awt.event.ActionEvent evt) {
-                                btn_lendsActionPerformed(evt);
-                        }
-                });
-
-                btn_returns.setBackground(new java.awt.Color(21, 101, 192));
-                btn_returns.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-                btn_returns.setForeground(new java.awt.Color(255, 255, 255));
-                btn_returns.setIcon(new javax.swing.ImageIcon(getClass().getResource("/calendar-multiple-check.png"))); // NOI18N
-                btn_returns.setText("Devoluciones");
-                btn_returns.setBorder(
-                                javax.swing.BorderFactory.createMatteBorder(1, 13, 1, 1, new java.awt.Color(0, 0, 0)));
-                btn_returns.setBorderPainted(false);
-                btn_returns.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-                btn_returns.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-                btn_returns.setIconTextGap(13);
-                btn_returns.setInheritsPopupMenu(true);
-                btn_returns.addActionListener(new java.awt.event.ActionListener() {
-                        public void actionPerformed(java.awt.event.ActionEvent evt) {
-                                btn_returnsActionPerformed(evt);
-                        }
-                });
-
-                btn_users.setBackground(new java.awt.Color(21, 101, 192));
-                btn_users.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-                btn_users.setForeground(new java.awt.Color(255, 255, 255));
-                btn_users.setIcon(new javax.swing.ImageIcon(getClass().getResource("/account-multiple.png"))); // NOI18N
-                btn_users.setText("Usuarios");
-                btn_users.setBorder(
-                                javax.swing.BorderFactory.createMatteBorder(1, 13, 1, 1, new java.awt.Color(0, 0, 0)));
-                btn_users.setBorderPainted(false);
-                btn_users.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-                btn_users.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-                btn_users.setIconTextGap(13);
-                btn_users.setInheritsPopupMenu(true);
-                btn_users.addActionListener(new java.awt.event.ActionListener() {
-                        public void actionPerformed(java.awt.event.ActionEvent evt) {
-                                btn_usersActionPerformed(evt);
+                                btn_loginActionPerformed(evt);
                         }
                 });
 
                 btn_books.setBackground(new java.awt.Color(21, 101, 192));
                 btn_books.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
                 btn_books.setForeground(new java.awt.Color(255, 255, 255));
-                btn_books.setIcon(new javax.swing.ImageIcon(getClass().getResource("/book-open-page-variant.png"))); // NOI18N
-                btn_books.setText("Libros");
+                btn_books.setIcon(new javax.swing.ImageIcon(getClass().getResource("/calendar-plus.png"))); // NOI18N
+                btn_books.setText("Mis libros");
                 btn_books.setBorder(
                                 javax.swing.BorderFactory.createMatteBorder(1, 13, 1, 1, new java.awt.Color(0, 0, 0)));
                 btn_books.setBorderPainted(false);
-                btn_books.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+                btn_books.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
                 btn_books.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
                 btn_books.setIconTextGap(13);
                 btn_books.setInheritsPopupMenu(true);
@@ -200,39 +165,39 @@ public class Dashboard extends javax.swing.JFrame {
                         }
                 });
 
-                btn_reports.setBackground(new java.awt.Color(21, 101, 192));
-                btn_reports.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-                btn_reports.setForeground(new java.awt.Color(255, 255, 255));
-                btn_reports.setIcon(new javax.swing.ImageIcon(getClass().getResource("/file-chart.png"))); // NOI18N
-                btn_reports.setText("Reportes");
-                btn_reports.setBorder(
+                btn_lend.setBackground(new java.awt.Color(21, 101, 192));
+                btn_lend.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+                btn_lend.setForeground(new java.awt.Color(255, 255, 255));
+                btn_lend.setIcon(new javax.swing.ImageIcon(getClass().getResource("/calendar-multiple-check.png"))); // NOI18N
+                btn_lend.setText("Reservar");
+                btn_lend.setBorder(
                                 javax.swing.BorderFactory.createMatteBorder(1, 13, 1, 1, new java.awt.Color(0, 0, 0)));
-                btn_reports.setBorderPainted(false);
-                btn_reports.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-                btn_reports.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-                btn_reports.setIconTextGap(13);
-                btn_reports.setInheritsPopupMenu(true);
-                btn_reports.addActionListener(new java.awt.event.ActionListener() {
+                btn_lend.setBorderPainted(false);
+                btn_lend.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+                btn_lend.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+                btn_lend.setIconTextGap(13);
+                btn_lend.setInheritsPopupMenu(true);
+                btn_lend.addActionListener(new java.awt.event.ActionListener() {
                         public void actionPerformed(java.awt.event.ActionEvent evt) {
-                                btn_reportsActionPerformed(evt);
+                                btn_lendActionPerformed(evt);
                         }
                 });
 
-                btn_client.setBackground(new java.awt.Color(21, 101, 192));
-                btn_client.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-                btn_client.setForeground(new java.awt.Color(255, 255, 255));
-                btn_client.setIcon(new javax.swing.ImageIcon(getClass().getResource("/account-multiple.png"))); // NOI18N
-                btn_client.setText("Sección del cliente");
-                btn_client.setBorder(
+                btn_logout.setBackground(new java.awt.Color(21, 101, 192));
+                btn_logout.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+                btn_logout.setForeground(new java.awt.Color(255, 255, 255));
+                btn_logout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/file-chart.png"))); // NOI18N
+                btn_logout.setText("Cerrar sesión");
+                btn_logout.setBorder(
                                 javax.swing.BorderFactory.createMatteBorder(1, 13, 1, 1, new java.awt.Color(0, 0, 0)));
-                btn_client.setBorderPainted(false);
-                btn_client.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-                btn_client.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-                btn_client.setIconTextGap(13);
-                btn_client.setInheritsPopupMenu(true);
-                btn_client.addActionListener(new java.awt.event.ActionListener() {
+                btn_logout.setBorderPainted(false);
+                btn_logout.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+                btn_logout.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+                btn_logout.setIconTextGap(13);
+                btn_logout.setInheritsPopupMenu(true);
+                btn_logout.addActionListener(new java.awt.event.ActionListener() {
                         public void actionPerformed(java.awt.event.ActionEvent evt) {
-                                btn_clientActionPerformed(evt);
+                                btn_logoutActionPerformed(evt);
                         }
                 });
 
@@ -252,19 +217,13 @@ public class Dashboard extends javax.swing.JFrame {
                                                                                 javax.swing.GroupLayout.PREFERRED_SIZE,
                                                                                 190,
                                                                                 javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addComponent(btn_lend, javax.swing.GroupLayout.PREFERRED_SIZE, 270,
+                                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(btn_logout, javax.swing.GroupLayout.PREFERRED_SIZE, 270,
+                                                                javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addComponent(btn_books, javax.swing.GroupLayout.PREFERRED_SIZE, 270,
                                                                 javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(btn_client, javax.swing.GroupLayout.PREFERRED_SIZE, 270,
-                                                                javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(btn_returns, javax.swing.GroupLayout.PREFERRED_SIZE, 270,
-                                                                javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(btn_prin, javax.swing.GroupLayout.PREFERRED_SIZE, 270,
-                                                                javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(btn_reports, javax.swing.GroupLayout.PREFERRED_SIZE, 270,
-                                                                javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(btn_lends, javax.swing.GroupLayout.PREFERRED_SIZE, 270,
-                                                                javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(btn_users, javax.swing.GroupLayout.PREFERRED_SIZE, 270,
+                                                .addComponent(btn_login, javax.swing.GroupLayout.PREFERRED_SIZE, 270,
                                                                 javax.swing.GroupLayout.PREFERRED_SIZE));
                 menuLayout.setVerticalGroup(
                                 menuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -284,50 +243,26 @@ public class Dashboard extends javax.swing.JFrame {
                                                                                 javax.swing.GroupLayout.Alignment.LEADING)
                                                                                 .addGroup(menuLayout
                                                                                                 .createSequentialGroup()
-                                                                                                .addGap(200, 200, 200)
-                                                                                                .addComponent(btn_books,
-                                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                                                                                52,
-                                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                                                .addGroup(menuLayout
-                                                                                                .createSequentialGroup()
-                                                                                                .addGap(300, 300, 300)
-                                                                                                .addComponent(btn_client,
-                                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                                                                                52,
-                                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                                                .addGroup(menuLayout
-                                                                                                .createSequentialGroup()
                                                                                                 .addGap(100, 100, 100)
-                                                                                                .addComponent(btn_returns,
+                                                                                                .addComponent(btn_lend,
                                                                                                                 javax.swing.GroupLayout.PREFERRED_SIZE,
                                                                                                                 52,
                                                                                                                 javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                                                .addComponent(btn_prin,
+                                                                                .addComponent(btn_logout,
                                                                                                 javax.swing.GroupLayout.PREFERRED_SIZE,
                                                                                                 52,
                                                                                                 javax.swing.GroupLayout.PREFERRED_SIZE)
                                                                                 .addGroup(menuLayout
                                                                                                 .createSequentialGroup()
-                                                                                                .addGap(250, 250, 250)
-                                                                                                .addComponent(btn_reports,
-                                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                                                                                52,
-                                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                                                .addGroup(menuLayout
-                                                                                                .createSequentialGroup()
                                                                                                 .addGap(50, 50, 50)
-                                                                                                .addComponent(btn_lends,
+                                                                                                .addComponent(btn_books,
                                                                                                                 javax.swing.GroupLayout.PREFERRED_SIZE,
                                                                                                                 52,
                                                                                                                 javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                                                .addGroup(menuLayout
-                                                                                                .createSequentialGroup()
-                                                                                                .addGap(150, 150, 150)
-                                                                                                .addComponent(btn_users,
-                                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                                                                                52,
-                                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE)))));
+                                                                                .addComponent(btn_login,
+                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                                                52,
+                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE))));
 
                 header.setBackground(new java.awt.Color(25, 118, 210));
                 header.setPreferredSize(new java.awt.Dimension(744, 150));
@@ -440,34 +375,24 @@ public class Dashboard extends javax.swing.JFrame {
                 setLocationRelativeTo(null);
         }// </editor-fold>//GEN-END:initComponents
 
-        private void btn_reportsActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btn_reportsActionPerformed
-                ShowJPanel(new Reports());
-        }// GEN-LAST:event_btn_reportsActionPerformed
+        private void btn_logoutActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btn_logoutActionPerformed
+                HideLoggedInButtons();
+                ShowJPanel(new Login());
+                javax.swing.JOptionPane.showMessageDialog(this, "Sesión cerrada con éxito. \n",
+                                "AVISO", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+        }// GEN-LAST:event_btn_logoutActionPerformed
+
+        private void btn_lendActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btn_lendActionPerformed
+                ShowJPanel(new ClientBooks(true));
+        }// GEN-LAST:event_btn_lendActionPerformed
 
         private void btn_booksActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btn_booksActionPerformed
-                ShowJPanel(new Books());
+                ShowJPanel(new ClientBooks(false));
         }// GEN-LAST:event_btn_booksActionPerformed
 
-        private void btn_usersActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btn_usersActionPerformed
-                ShowJPanel(new Users());
-        }// GEN-LAST:event_btn_usersActionPerformed
-
-        private void btn_returnsActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btn_returnsActionPerformed
-                ShowJPanel(new Returns());
-        }// GEN-LAST:event_btn_returnsActionPerformed
-
-        private void btn_lendsActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btn_lendsActionPerformed
-                ShowJPanel(new Lendings());
-        }// GEN-LAST:event_btn_lendsActionPerformed
-
-        private void btn_prinActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btn_prinActionPerformed
-                ShowJPanel(new Principal());
-        }// GEN-LAST:event_btn_prinActionPerformed
-
-        private void btn_clientActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btn_clientActionPerformed
-                new ClientDashboard().setVisible(true);
-                this.dispose();
-        }// GEN-LAST:event_btn_clientActionPerformed
+        private void btn_loginActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btn_loginActionPerformed
+                ShowJPanel(new Login());
+        }// GEN-LAST:event_btn_loginActionPerformed
 
         /**
          * @param args the command line arguments
@@ -479,7 +404,7 @@ public class Dashboard extends javax.swing.JFrame {
                 /* Create and display the form */
                 java.awt.EventQueue.invokeLater(new Runnable() {
                         public void run() {
-                                new Dashboard().setVisible(true);
+                                new ClientDashboard().setVisible(true);
                         }
                 });
         }
@@ -488,12 +413,9 @@ public class Dashboard extends javax.swing.JFrame {
         private javax.swing.JLabel appName;
         private javax.swing.JPanel background;
         private javax.swing.JButton btn_books;
-        private javax.swing.JButton btn_client;
-        private javax.swing.JButton btn_lends;
-        private javax.swing.JButton btn_prin;
-        private javax.swing.JButton btn_reports;
-        private javax.swing.JButton btn_returns;
-        private javax.swing.JButton btn_users;
+        private javax.swing.JButton btn_lend;
+        private javax.swing.JButton btn_login;
+        private javax.swing.JButton btn_logout;
         private static javax.swing.JPanel content;
         private javax.swing.JLabel dateText;
         private javax.swing.JPanel header;

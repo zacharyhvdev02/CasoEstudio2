@@ -10,4 +10,5 @@ public interface DAOUsers {
     public void eliminar(int userId) throws Exception;
     public List<Users> listar(String name) throws Exception;
     public Users getUserById(int userId) throws Exception;
+    public int login(String username, String password) throws Exception;
 }
