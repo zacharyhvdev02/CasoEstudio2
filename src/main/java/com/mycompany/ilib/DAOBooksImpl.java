@@ -2,9 +2,11 @@ package com.mycompany.ilib;
 
 import com.mycompany.db.Database;
 import com.mycompany.interfaces.DAOBooks;
+import com.mycompany.models.BookState;
 import com.mycompany.models.Books;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,7 +16,9 @@ public class DAOBooksImpl extends Database implements DAOBooks {
     public void registrar(Books book) throws Exception {
         try {
             this.Conectar();
-            PreparedStatement st = this.conexion.prepareStatement("INSERT INTO books(title, date, author, category, edit, lang, pages, description, ejemplares, stock, available, state) VALUES(?,?,?,?,?,?,?,?,?,?,?,?);");
+            PreparedStatement st = this.conexion.prepareStatement(
+                    "INSERT INTO books (title, date, author, category, edit, lang, pages, description, ejemplares, stock, available, state, created_date) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);"
+            );
             st.setString(1, book.getTitle());
             st.setString(2, book.getDate());
             st.setString(3, book.getAuthor());
@@ -27,9 +31,10 @@ public class DAOBooksImpl extends Database implements DAOBooks {
             st.setInt(10, book.getStock());
             st.setInt(11, book.getAvailable());
             st.setInt(12, book.getState().getValue());
+            st.setDate(13, new java.sql.Date(book.getCreatedDate().getTime()));
             st.executeUpdate();
             st.close();
-        } catch(Exception e) {
+        } catch (SQLException e) {
             throw e;
         } finally {
             this.Cerrar();
@@ -40,7 +45,9 @@ public class DAOBooksImpl extends Database implements DAOBooks {
     public void modificar(Books book) throws Exception {
         try {
             this.Conectar();
-            PreparedStatement st = this.conexion.prepareStatement("UPDATE books SET title = ?, date = ?, author = ?, category = ?, edit = ?, lang = ?, pages = ?, description = ?, ejemplares = ?, stock = ?, available = ?, state = ? WHERE id = ?");
+            PreparedStatement st = this.conexion.prepareStatement(
+                    "UPDATE books SET title = ?, date = ?, author = ?, category = ?, edit = ?, lang = ?, pages = ?, description = ?, ejemplares = ?, stock = ?, available = ?, state = ? WHERE id = ?;"
+            );
             st.setString(1, book.getTitle());
             st.setString(2, book.getDate());
             st.setString(3, book.getAuthor());
@@ -56,7 +63,7 @@ public class DAOBooksImpl extends Database implements DAOBooks {
             st.setInt(13, book.getId());
             st.executeUpdate();
             st.close();
-        } catch(Exception e) {
+        } catch (SQLException e) {
             throw e;
         } finally {
             this.Cerrar();
@@ -71,7 +78,7 @@ public class DAOBooksImpl extends Database implements DAOBooks {
             st.setInt(1, bookId);
             st.executeUpdate();
             st.close();
-        } catch(Exception e) {
+        } catch (SQLException e) {
             throw e;
         } finally {
             this.Cerrar();
@@ -80,15 +87,16 @@ public class DAOBooksImpl extends Database implements DAOBooks {
 
     @Override
     public List<Books> listar(String title) throws Exception {
-        List<Books> lista = null;
+        List<Books> lista = new ArrayList<>();
         try {
             this.Conectar();
-            String Query = title.isEmpty() ? "SELECT * FROM books;" : "SELECT * FROM books WHERE title LIKE '%" + title + "%';";
-            PreparedStatement st = this.conexion.prepareStatement(Query);
-            
-            lista = new ArrayList();
+            String query = title.isEmpty() ? "SELECT * FROM books;" : "SELECT * FROM books WHERE title LIKE ?;";
+            PreparedStatement st = this.conexion.prepareStatement(query);
+            if (!title.isEmpty()) {
+                st.setString(1, "%" + title + "%");
+            }
             ResultSet rs = st.executeQuery();
-            while(rs.next()) {
+            while (rs.next()) {
                 Books book = new Books();
                 book.setId(rs.getInt("id"));
                 book.setTitle(rs.getString("title"));
@@ -102,13 +110,13 @@ public class DAOBooksImpl extends Database implements DAOBooks {
                 book.setEjemplares(rs.getString("ejemplares"));
                 book.setStock(rs.getInt("stock"));
                 book.setAvailable(rs.getInt("available"));
-                book.setState(rs.getInt("state"));
-                book.setCreatedDate(rs.getDate("Created"));
+                book.setState(BookState.from(rs.getInt("state")));
+                book.setCreatedDate(rs.getDate("created_date"));
                 lista.add(book);
             }
             rs.close();
             st.close();
-        } catch(Exception e) {
+        } catch (SQLException e) {
             throw e;
         } finally {
             this.Cerrar();
@@ -119,14 +127,12 @@ public class DAOBooksImpl extends Database implements DAOBooks {
     @Override
     public Books getBookById(int bookId) throws Exception {
         Books book = null;
-        
         try {
             this.Conectar();
             PreparedStatement st = this.conexion.prepareStatement("SELECT * FROM books WHERE id = ? LIMIT 1;");
             st.setInt(1, bookId);
-            
             ResultSet rs = st.executeQuery();
-            while(rs.next()) {
+            if (rs.next()) {
                 book = new Books();
                 book.setId(rs.getInt("id"));
                 book.setTitle(rs.getString("title"));
@@ -140,15 +146,16 @@ public class DAOBooksImpl extends Database implements DAOBooks {
                 book.setEjemplares(rs.getString("ejemplares"));
                 book.setStock(rs.getInt("stock"));
                 book.setAvailable(rs.getInt("available"));
-                book.setState(rs.getInt("state"));
+                book.setState(BookState.from(rs.getInt("state")));
+                book.setCreatedDate(rs.getDate("created_date"));
             }
             rs.close();
             st.close();
-        } catch(Exception e) {
+        } catch (SQLException e) {
             throw e;
         } finally {
             this.Cerrar();
         }
         return book;
-    }   
+    }
 }

@@ -6,30 +6,27 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-
 public class Database {
-    
+
     protected Connection conexion;
-    private final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
-    private final String DB_URL = "jdbc:mysql://localhost:3306/proyecto?characterEncoding=latin1";
-    
-    private final String USER = "root";
-    private final String PASS = "1234";
-    
+    private final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
+    private final String DB_URL = "jdbc:mysql://localhost:3306/ilib?characterEncoding=latin1";
+
+    private final String USER = "ilibuser";
+    private final String PASS = "12345";
+
     public void Conectar() throws ClassNotFoundException {
         try {
-            conexion = DriverManager.getConnection(DB_URL, USER, PASS);
             Class.forName(JDBC_DRIVER);
+            conexion = DriverManager.getConnection(DB_URL, USER, PASS);
         } catch (SQLException ex) {
             Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    public void Cerrar() throws SQLException{
-        if (conexion != null) {
-            if (!conexion.isClosed()) {
-                conexion.close();
-            }
+
+    public void Cerrar() throws SQLException {
+        if (conexion != null && !conexion.isClosed()) {
+            conexion.close();
         }
     }
 }

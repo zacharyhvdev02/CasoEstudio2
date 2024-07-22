@@ -1,8 +1,10 @@
 package com.mycompany.models;
 
+import com.mycompany.observer.Observer;
+import com.mycompany.observer.Subject;
 import java.util.Date;
 
-public class Books {
+public class Books extends Subject {
     private int id;
     private String title;
     private String date;
@@ -60,19 +62,21 @@ public class Books {
 
     public void setStock(int stock) {
         this.stock = stock;
+        if (stock <= 2) {
+            notifyObservers(this);
+        }
     }
 
     public void setAvailable(int available) {
         this.available = available;
     }
-    
-    // for SQL integer conversion.
+
     public void setState(int state) {
-    	this.state = BookState.from(state);
+        this.state = BookState.from(state);
     }
-    
+
     public void setState(BookState state) {
-    	this.state = state;
+        this.state = state;
     }
 
     public int getId() {
@@ -122,16 +126,23 @@ public class Books {
     public int getAvailable() {
         return available;
     }
-    
+
     public BookState getState() {
-    	return this.state;
+        return this.state;
     }
 
-	public Date getCreatedDate() {
-		return createdDate;
-	}
+    public Date getCreatedDate() {
+        return createdDate;
+    }
 
-	public void setCreatedDate(Date createdDate) {
-		this.createdDate = createdDate;
-	}
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
+    }
+    public void addObserver(Observer observer) {
+        super.addObserver(observer);
+    }
+
+    public void removeObserver(Observer observer) {
+        super.removeObserver(observer);
+    }
 }
